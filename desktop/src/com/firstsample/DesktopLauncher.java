@@ -2,7 +2,7 @@ package com.firstsample;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.firstsample.OurGame;
+import com.badlogic.gdx.graphics.glutils.HdpiMode;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {

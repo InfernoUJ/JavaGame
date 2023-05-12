@@ -1,10 +1,8 @@
 package com.firstsample;
 
-import Screens.MainMenuScreen;
+import com.firstsample.Screens.MainMenuScreen;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 public class OurGame extends Game {
 	SpriteBatch batch;
@@ -14,6 +12,8 @@ public class OurGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		mainMenuScreen = new MainMenuScreen(this);
+
+		this.setScreen(mainMenuScreen);
 	}
 
 	@Override
