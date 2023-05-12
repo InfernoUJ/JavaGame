@@ -2,7 +2,7 @@ package com.firstsample;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.firstsample.Game;
+import com.firstsample.OurGame;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
@@ -11,6 +11,8 @@ public class DesktopLauncher {
 
 		config.setForegroundFPS(60);
 		config.setTitle("FirstSample");
-		new Lwjgl3Application(new Game(), config);
+		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode(Lwjgl3ApplicationConfiguration.getPrimaryMonitor()));
+
+		new Lwjgl3Application(new OurGame(), config);
 	}
 }
