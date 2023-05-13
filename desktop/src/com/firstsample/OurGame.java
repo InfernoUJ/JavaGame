@@ -1,6 +1,5 @@
 package com.firstsample;
 
-import com.firstsample.Screens.MainMenuScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
