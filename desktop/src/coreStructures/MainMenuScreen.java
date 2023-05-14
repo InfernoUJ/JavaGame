@@ -1,4 +1,4 @@
-package com.firstsample;
+package coreStructures;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
