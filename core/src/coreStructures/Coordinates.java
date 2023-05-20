@@ -1,17 +1,17 @@
 package coreStructures;
 
 public abstract class Coordinates {
-    private int xCenterCoordinate;
-    private int yCenterCoordinate;
+    private float xCenterCoordinate;
+    private float yCenterCoordinate;
 
     public abstract int getWidth();
     public abstract int getLength();
 
-    public int getxCenterCoordinate() {
+    public float getxCenterCoordinate() {
         return xCenterCoordinate;
     }
 
-    public int getyCenterCoordinate() {
+    public float getyCenterCoordinate() {
         return yCenterCoordinate;
     }
 

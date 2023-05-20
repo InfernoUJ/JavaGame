@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Board extends Coordinates {
 
-    List<?extends BlockOfTiles> blocks = new ArrayList<>();
+    public List<?extends BlockOfTiles> blocks = new ArrayList<>();
     @Override
     public int getWidth() {
         return 0;
@@ -16,6 +16,10 @@ public class Board extends Coordinates {
     @Override
     public int getLength() {
         return 0;
+    }
+
+    public void placeBlock(BlockOfTiles blockOfTiles){
+
     }
 }
 
