@@ -1,5 +1,7 @@
 package Projectiles;
 
+import Characters.Person;
+import SpecificTiles.Wall;
 import com.sun.tools.javac.util.Pair;
 import coreStructures.Coordinates;
 import coreStructures.Movable;
@@ -22,6 +24,8 @@ public abstract class Projectile extends Coordinates implements Movable {
     Projectile(float xCenterCoordinates, float yCenterCoordinates, Pair<Float,Float> direction) {
 
     }
+    abstract void hit(Person a);
+    abstract void hit(Wall a);
 
 
     @Override
