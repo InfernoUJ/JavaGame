@@ -2,7 +2,7 @@
 .sshkey
 .sshkey.pub
 .git
-
+.gitignore
 ## Java
 
 *.class

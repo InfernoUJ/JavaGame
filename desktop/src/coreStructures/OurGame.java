@@ -2,15 +2,16 @@ package coreStructures;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import viewmodel.Manager;
 
 public class OurGame extends Game {
 	SpriteBatch batch;
-	public MainMenuScreen mainMenuScreen;
+	public Manager mainMenuScreen;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		mainMenuScreen = new MainMenuScreen(this);
+		mainMenuScreen = new Manager(this);
 
 		this.setScreen(mainMenuScreen);
 	}

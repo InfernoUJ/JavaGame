@@ -1,4 +1,4 @@
-package coreStructures;
+package view;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -6,31 +6,40 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import viewmodel.Manager;
 
-public class StartStage extends Stage{
-    MainMenuScreen mainMenuScreen;
+public class StartMenuScreen extends Stage{
+    private Manager mainManager;
     public Stage currentStage;
 
-    public StartStage(MainMenuScreen mainMenuScreen){
-        this.mainMenuScreen = mainMenuScreen;
+    public StartMenuScreen(Manager mainManager){
+        this.mainManager = mainManager;
 
-        currentStage = new Stage(mainMenuScreen.viewport);
+        currentStage = new Stage(mainManager.viewport);
 
-        TextButton StartGameButton = new TextButton("Start", mainMenuScreen.skin);
+        TextButton StartGameButton = new TextButton("Start", mainManager.skin);
         // funny, but it doesn't work
         StartGameButton.setSize(100, 500);
-        TextButton SettingsButton = new TextButton("Settings", mainMenuScreen.skin);
+        StartGameButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                mainManager.startGame();
+            }
+        });
+
+        TextButton SettingsButton = new TextButton("Settings", mainManager.skin);
         SettingsButton.setSize(200, 50);
-        TextButton ExitButton = new TextButton("Exit", mainMenuScreen.skin);
+
+        TextButton ExitButton = new TextButton("Exit", mainManager.skin);
         ExitButton.setSize(200, 50);
         ExitButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.app.exit();
+                mainManager.exitGame();
             }
         });
 
-        Table table = new Table(mainMenuScreen.skin);
+        Table table = new Table(mainManager.skin);
 
         // set children coord system to parent coord system
         table.setTransform(true);
@@ -45,7 +54,7 @@ public class StartStage extends Stage{
         table.row();
         table.add(ExitButton);
 
-        //table.background(mainMenuScreen.backScreen);
+        //table.background(mainManager.backScreen);
         currentStage.addActor(table);
     }
 }
