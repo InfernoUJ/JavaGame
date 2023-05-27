@@ -1,9 +1,10 @@
 package Characters;
 
 import Projectiles.Projectile;
-import com.sun.tools.javac.util.Pair;
+
 import coreStructures.Coordinates;
 import coreStructures.Movable;
+import org.apache.commons.lang3.tuple.Pair;
 
 public  abstract class Person extends Coordinates implements Movable {
     int speed;

@@ -2,7 +2,7 @@ package Projectiles;
 
 import Characters.Person;
 import SpecificTiles.Wall;
-import com.sun.tools.javac.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class EnemyProjectile extends Projectile {
 

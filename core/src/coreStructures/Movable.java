@@ -1,6 +1,6 @@
 package coreStructures;
 
-import com.sun.tools.javac.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 public  interface Movable  {
     void setSpeed(int speed);

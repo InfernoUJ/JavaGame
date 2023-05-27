@@ -2,7 +2,7 @@ package Projectiles;
 
 import Characters.Person;
 import SpecificTiles.Wall;
-import com.sun.tools.javac.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class PlayerProjectile extends Projectile{
     PlayerProjectile(float xCenterCoordinates, float yCenterCoordinates, Pair<Float, Float> direction) {
