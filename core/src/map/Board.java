@@ -10,12 +10,12 @@ public class Board extends Coordinates {
     public List<BlockOfTiles> blocks = new ArrayList<>();
     @Override
     public int getWidth() {
-        return 39;
+        return 41;
     }
 
     @Override
     public int getLength() {
-        return 15;
+        return 17;
     }
 
     public void placeBlock(BlockOfTiles blockOfTiles){
