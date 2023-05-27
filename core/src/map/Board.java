@@ -7,15 +7,15 @@ import java.util.List;
 
 public class Board extends Coordinates {
 
-    public List<?extends BlockOfTiles> blocks = new ArrayList<>();
+    public List<BlockOfTiles> blocks = new ArrayList<>();
     @Override
     public int getWidth() {
-        return 0;
+        return 39;
     }
 
     @Override
     public int getLength() {
-        return 0;
+        return 15;
     }
 
     public void placeBlock(BlockOfTiles blockOfTiles){
