@@ -21,11 +21,13 @@ public abstract class Projectile extends Coordinates implements Movable {
         this.damage = damage;
     }
 
-    Projectile(float xCenterCoordinates, float yCenterCoordinates, Pair<Float,Float> direction) {
-
+    public Projectile(float xCenterCoordinates, float yCenterCoordinates, int speed, Pair<Float,Float> direction) {
+        setxCenterCoordinate(xCenterCoordinates);
+        setyCenterCoordinate(yCenterCoordinates);
+        setDirection(direction);
+        setSpeed(speed);
     }
     abstract void hit(Person a);
-    abstract void hit(Wall a);
 
 
     @Override
@@ -39,12 +41,13 @@ public abstract class Projectile extends Coordinates implements Movable {
     }
 
     @Override
-    public void setDirection(Pair<Integer, Integer> direction) {
-
+    public void setDirection(Pair<Float, Float> direction) {
+        destinationXCoordinate = direction.getLeft();
+        destinationYCoordinate  =direction.getRight();
     }
 
     @Override
-    public Pair<Integer, Integer> getDirection() {
-        return null;
+    public Pair<Float, Float> getDirection() {
+       return Pair.of(destinationXCoordinate,destinationYCoordinate);
     }
 }

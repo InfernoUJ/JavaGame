@@ -14,10 +14,7 @@ public class PlayerProjectile extends Projectile{
 
     }
 
-    @Override
-    void hit(Wall a) {
 
-    }
 
     @Override
     public int getWidth() {

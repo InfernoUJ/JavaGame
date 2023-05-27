@@ -48,12 +48,12 @@ public  abstract class Person extends Coordinates implements Movable {
     }
 
     @Override
-    public void setDirection(Pair<Integer, Integer> direction) {
+    public void setDirection(Pair<Float, Float> direction) {
 
     }
 
     @Override
-    public Pair<Integer, Integer> getDirection() {
+    public Pair<Float, Float> getDirection() {
         return null;
     }
 }

@@ -17,10 +17,6 @@ public class EnemyProjectile extends Projectile {
 
     }
 
-    @Override
-    void hit(Wall a) {
-
-    }
 
 
     @Override

@@ -15,11 +15,11 @@ public abstract class Coordinates {
         return yCenterCoordinate;
     }
 
-    public void setxCenterCoordinate(int xCenterCoordinate) {
+    public void setxCenterCoordinate(float xCenterCoordinate) {
         this.xCenterCoordinate = xCenterCoordinate;
     }
 
-    public void setyCenterCoordinate(int yCenterCoordinate) {
+    public void setyCenterCoordinate(float yCenterCoordinate) {
         this.yCenterCoordinate = yCenterCoordinate;
     }
 }

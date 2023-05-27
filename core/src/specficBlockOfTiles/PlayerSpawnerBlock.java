@@ -2,7 +2,6 @@ package specficBlockOfTiles;
 
 import map.BlockOfTiles;
 import map.Tile;
-import specificTiles.EnemySpawner;
 import specificTiles.NormalTile;
 import specificTiles.PlayerSpawner;
 
