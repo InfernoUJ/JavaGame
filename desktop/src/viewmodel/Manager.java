@@ -34,7 +34,7 @@ public class Manager extends ScreenAdapter{
     }
     public void startGame(){
         currentStage.dispose();
-        currentStage = new GameScreen(this, new GameManager()).currentStage;
+        currentStage = new GameScreen(this, new GameManager(1)).currentStage;
         Gdx.input.setInputProcessor(currentStage);
     }
 
