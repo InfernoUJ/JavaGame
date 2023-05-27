@@ -1,5 +1,6 @@
 package specificTiles;
 
+import characters.Person;
 import map.Trap;
 
 public class SlowingTrap extends Trap {
@@ -18,5 +19,16 @@ public class SlowingTrap extends Trap {
 
     public int getSlowPercent() {
         return slowPercent;
+    }
+
+    @Override
+    public void hit(Person a) {
+        if(!isActivated()) {
+            throw new IllegalStateException("inactive trap cannot hit anybody");
+        }
+        if(a == null) {
+            throw new NullPointerException("trap tries to hit a null");
+        }
+        a.setSpeed(a.getSpeed()*(slowPercent/100));
     }
 }

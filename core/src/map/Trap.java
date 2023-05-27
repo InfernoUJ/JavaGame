@@ -1,7 +1,9 @@
 package map;
 
+import characters.Person;
+
 public abstract class Trap extends Tile {
-    private boolean activated;
+    private boolean activated = false;
     private int damage = 0;
     protected Trap(int xCenterCoordinate, int yCenterCoordinate) {
         super(xCenterCoordinate,yCenterCoordinate);
@@ -24,9 +26,19 @@ public abstract class Trap extends Tile {
         }
         this.damage = damage;
     }
+    public void hit(Person a) {
+        if(isActivated()) {
+            throw new IllegalStateException("inactive trap cannot hit anybody");
+        }
+        if(a == null) {
+            throw new NullPointerException("trap tries to hit a null");
+        }
+        a.getHit(damage);
+    }
 
     public int getDamage() {
-        if(isActivated()){return damage;}
-        return 0;
+
+        return damage;
+
     }
 }
