@@ -10,7 +10,7 @@ public abstract class BlockOfTiles extends Coordinates {
 
     private final static int width = 3* Tile.width;
     private final static int length = 3*Tile.length;
-    public final List<Tile> internalTiles= new ArrayList<>(width/Tile.width);
+    public final List<Tile> internalTiles= new ArrayList<>();
 
     @Override
     public int getWidth() {
