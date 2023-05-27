@@ -8,16 +8,7 @@ public class Level {
     Level(int difficulty) {
 
     }
-    public void activateAllTraps() {
 
-    }
-    public void deactivateAllTraps() {
-
-    }
-
-    private void makeGameMoreDifficult(int howMuchHarder) {
-
-    }
 
     public void startLevel() {
 

@@ -21,6 +21,12 @@ public class Board extends Coordinates {
     public void placeBlock(BlockOfTiles blockOfTiles){
 
     }
+    public void activateAllTraps() {
+
+    }
+    public void deactivateAllTraps() {
+
+    }
 }
 
 
