@@ -18,25 +18,34 @@ public abstract class Projectile extends Coordinates implements Movable {
     }
 
     public void setDamage(int damage) {
+        if(damage < 0) {
+            throw new IllegalArgumentException("Projectile:setDmg - cannot deal negative damage");
+        }
         this.damage = damage;
     }
 
-    public Projectile(float xCenterCoordinates, float yCenterCoordinates, int speed, Pair<Float,Float> direction) {
+    public Projectile(float xCenterCoordinates, float yCenterCoordinates, int speed, Pair<Float,Float> direction, int damage) {
+        if(speed < 0) {
+            throw new IllegalArgumentException("Projectile - cannot give negative speed to a projectile");
+        }
         setxCenterCoordinate(xCenterCoordinates);
         setyCenterCoordinate(yCenterCoordinates);
         setDirection(direction);
         setSpeed(speed);
+        setDamage(damage);
     }
     abstract void hit(Person a);
 
     @Override
     public void setSpeed(int speed) {
-
+        if(speed < 0) {
+            throw  new IllegalArgumentException("setSpeed - cannot give negative speed to a projectile");
+        }
     }
 
     @Override
     public int getSpeed() {
-        return 0;
+        return speed;
     }
 
     @Override

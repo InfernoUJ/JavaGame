@@ -4,8 +4,8 @@ import characters.Person;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class PlayerProjectile extends Projectile{
-    public PlayerProjectile(float xCenterCoordinates, float yCenterCoordinates,int speed, Pair<Float, Float> direction) {
-        super(xCenterCoordinates, yCenterCoordinates, speed,direction);
+    public PlayerProjectile(float xCenterCoordinates, float yCenterCoordinates,int speed, Pair<Float, Float> direction, int damage) {
+        super(xCenterCoordinates, yCenterCoordinates, speed,direction, damage);
     }
 
     @Override
@@ -17,11 +17,11 @@ public class PlayerProjectile extends Projectile{
 
     @Override
     public int getWidth() {
-        return 0;
+        return 1;
     }
 
     @Override
     public int getLength() {
-        return 0;
+        return 1;
     }
 }

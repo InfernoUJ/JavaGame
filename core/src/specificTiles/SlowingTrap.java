@@ -10,6 +10,9 @@ public class SlowingTrap extends Trap {
     }
 
     public void setSlowPercent(int slowPercent) {
+        if(slowPercent < 0 || slowPercent > 100) {
+            throw new IllegalArgumentException("percent out of 0 - 100 range");
+        }
         this.slowPercent = slowPercent;
     }
 

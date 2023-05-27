@@ -13,6 +13,9 @@ public class HealingCamp extends Tile {
     }
 
     public void setHealingPercent(int healingPercent) {
+        if(healingPercent < 0) {
+            throw new IllegalArgumentException();
+        }
         this.healingPercent = healingPercent;
     }
 }
