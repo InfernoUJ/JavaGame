@@ -13,6 +13,7 @@ public class Board extends Coordinates {
 
     // Imagine its is matrix with dimensions 5 x 13
     public List<BlockOfTiles> blocks = new ArrayList<>(5*13);
+
     public Board(){ }
     @Override
     public int getWidth() {
