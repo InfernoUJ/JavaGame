@@ -33,7 +33,7 @@ public  abstract class Person extends Coordinates implements Movable {
     public void setHealthPoints(int healthPoints) {
         this.healthPoints = healthPoints;
     }
-    public void getDamage(int damage) {
+    public void getHit(int damage) {
 
     }
     public abstract Projectile shoot(float a,float b);

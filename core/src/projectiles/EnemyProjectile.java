@@ -7,8 +7,8 @@ import org.apache.commons.lang3.tuple.Pair;
 public class EnemyProjectile extends Projectile {
 
 
-    EnemyProjectile(float xCenterCoordinates, float yCenterCoordinates, Pair<Float,Float> direction) {
-        super(xCenterCoordinates, yCenterCoordinates, direction);
+    EnemyProjectile(float xCenterCoordinates, float yCenterCoordinates,int speed ,Pair<Float,Float> direction) {
+        super(xCenterCoordinates, yCenterCoordinates,speed, direction);
 
     }
 

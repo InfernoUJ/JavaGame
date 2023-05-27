@@ -29,7 +29,6 @@ public abstract class Projectile extends Coordinates implements Movable {
     }
     abstract void hit(Person a);
 
-
     @Override
     public void setSpeed(int speed) {
 

@@ -4,32 +4,31 @@ import characters.Person;
 import specificTiles.Wall;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class BigAoeAttack extends Projectile{
+
+
+public class BigAoeAttack extends Projectile {
 
     private int radius;
 
-    BigAoeAttack(float xCenterCoordinates, float yCenterCoordinates, Pair<Float, Float> direction) {
-        super(xCenterCoordinates, yCenterCoordinates, direction);
+    public BigAoeAttack(float xCenterCoordinates, float yCenterCoordinates, int radius) {
+        super(xCenterCoordinates, yCenterCoordinates, 0,Pair.of((float)0,(float)0));
+        this.radius = radius;
     }
 
     @Override
     void hit(Person a) {
-
+        a.getHit(this.getDamage());
     }
 
-    @Override
-    void hit(Wall a) {
-
-    }
 
 
     @Override
     public int getWidth() {
-        return 0;
+        return 2*radius;
     }
 
     @Override
     public int getLength() {
-        return 0;
+        return 2*radius;
     }
 }
