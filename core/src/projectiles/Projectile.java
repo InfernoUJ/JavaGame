@@ -1,7 +1,6 @@
 package projectiles;
 
 import characters.Person;
-import specificTiles.Wall;
 import org.apache.commons.lang3.tuple.Pair;
 import coreStructures.Coordinates;
 import coreStructures.Movable;
