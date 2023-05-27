@@ -2,6 +2,7 @@ package suppliers;
 
 
 import map.BlockOfTiles;
+import specficBlockOfTiles.NormalBlock;
 
 
 public class BlockOfTilesSupplier {
@@ -14,11 +15,15 @@ public class BlockOfTilesSupplier {
 
 
     BlockOfTilesSupplier() {
-
+        trapChance = 0;
+        wallChance = 0;
+        healingCampChance = 0;
+        enemyChance = 0;
     }
 
     BlockOfTiles generateBlock(int xCenterCoordinate, int yCenterCoordinate) {
-        return null;
+        // add randomization in future
+        return new NormalBlock(xCenterCoordinate, yCenterCoordinate);
     }
 
     public void setEnemyChance(int enemyChance) {

@@ -1,10 +1,16 @@
 package viewmodel;
 
-import com.badlogic.gdx.Gdx;
+import characters.Enemy;
+import characters.Player;
+import level.Level;
+import map.Board;
+
+import java.util.List;
 
 public class GameManager {
-    GameManager(){
-
+    private Player player;
+    private Level level;
+    GameManager(int difficulty){
+        level = new Level(difficulty);
     }
-
 }

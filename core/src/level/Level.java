@@ -5,8 +5,8 @@ import map.Board;
 public class Level {
     public Board board;
 
-    Level(int difficulty) {
-
+    public Level(int difficulty) {
+        board = new Board();
     }
     public void activateAllTraps() {
 
@@ -22,7 +22,5 @@ public class Level {
     public void startLevel() {
 
     }
-
-
 
 }

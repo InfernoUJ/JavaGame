@@ -5,7 +5,7 @@ import map.Tile;
 import specificTiles.NormalTile;
 
 public class NormalBlock extends BlockOfTiles {
-    NormalBlock(int xCenterCoordinate, int yCenterCoordinate){
+    public NormalBlock(int xCenterCoordinate, int yCenterCoordinate){
         setxCenterCoordinate(xCenterCoordinate);
         setyCenterCoordinate(yCenterCoordinate);
         internalTiles.add(new NormalTile((int)getxCenterCoordinate() - Tile.width , (int)getyCenterCoordinate() + Tile.length));
