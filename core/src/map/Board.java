@@ -47,10 +47,22 @@ public class Board extends Coordinates {
     }
 
     public void activateAllTraps() {
-
+        for(BlockOfTiles blockOfTiles:blocks) {
+            for(Tile tile:blockOfTiles.internalTiles) {
+                if(tile.getClass().isAssignableFrom(Trap.class)) {
+                    ((Trap)tile).activate();
+                }
+            }
+        }
     }
     public void deactivateAllTraps() {
-
+        for(BlockOfTiles blockOfTiles:blocks) {
+            for(Tile tile:blockOfTiles.internalTiles) {
+                if(tile.getClass().isAssignableFrom(Trap.class)) {
+                    ((Trap)tile).deactivate();
+                }
+            }
+        }
     }
 }
 
