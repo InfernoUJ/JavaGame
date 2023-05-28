@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import viewmodel.Manager;
 
 public class OurGame extends Game {
-	SpriteBatch batch;
+	public SpriteBatch batch;
 	public Manager mainMenuScreen;
 	
 	@Override
