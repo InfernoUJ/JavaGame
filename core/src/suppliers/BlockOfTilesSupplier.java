@@ -14,14 +14,14 @@ public class BlockOfTilesSupplier {
     private int enemyChance;
 
 
-    BlockOfTilesSupplier() {
+    public BlockOfTilesSupplier() {
         trapChance = 0;
         wallChance = 0;
         healingCampChance = 0;
         enemyChance = 0;
     }
 
-    BlockOfTiles generateBlock(int xCenterCoordinate, int yCenterCoordinate) {
+    public BlockOfTiles generateBlock(int xCenterCoordinate, int yCenterCoordinate) {
         // add randomization in future
         return new NormalBlock(xCenterCoordinate, yCenterCoordinate);
     }
