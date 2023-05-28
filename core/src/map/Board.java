@@ -1,6 +1,7 @@
 package map;
 
 import coreStructures.Coordinates;
+import specficBlockOfTiles.PlayerSpawnerBlock;
 import suppliers.BlockOfTilesSupplier;
 
 import java.util.ArrayList;
@@ -17,7 +18,23 @@ public class Board extends Coordinates {
 
     public Board(BlockOfTilesSupplier blockOfTilesSupplier){
         super(0,0);
-
+        for(int x = 0; x < 13;x++) {
+            for (int y = 0; y < 2; y++) {
+               blocks.add(blockOfTilesSupplier.generateBlock(-6 * BlockOfTiles.width + x*BlockOfTiles.width, 2 * BlockOfTiles.length - y*BlockOfTiles.length));
+            }
+        }
+        for(int x = 0; x < 6;x++) {
+            blocks.add(blockOfTilesSupplier.generateBlock((-6 + x)* BlockOfTiles.width,0));
+        }
+        blocks.add(new PlayerSpawnerBlock(0,0));
+        for(int x = 7;x < 13;x++) {
+            blocks.add(blockOfTilesSupplier.generateBlock((-6 + x)* BlockOfTiles.width,0));
+        }
+        for(int x = 0; x < 13;x++) {
+            for (int y = 3; y < 5; y++) {
+                blocks.add(blockOfTilesSupplier.generateBlock(-6 * BlockOfTiles.width + x*BlockOfTiles.width, 2 * BlockOfTiles.length - y*BlockOfTiles.length));
+            }
+        }
     }
     @Override
     public int getWidth() {

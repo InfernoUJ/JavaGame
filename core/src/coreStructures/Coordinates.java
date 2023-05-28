@@ -4,7 +4,7 @@ public abstract class Coordinates {
     private float xCenterCoordinate;
     private float yCenterCoordinate;
 
-    public abstract int getWidth();
+    public  abstract int getWidth();
     public abstract int getLength();
     public Coordinates(float xCenterCoordinate, float yCenterCoordinate) {
         this.xCenterCoordinate = xCenterCoordinate;
