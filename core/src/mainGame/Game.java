@@ -3,18 +3,26 @@ package mainGame;
 import level.Level;
 
 public class Game {
-    public Level level;
-    public int levelNumber;
+    private Level level;
+    private int levelNumber;
     public Level generateLevel() {
         return null;
     }
-    public void endTheGame(){
+    public Level getCurrentLevel() {
+        return level;
+    }
+    public int getCurrentLevelNumber() {
+        return levelNumber;
+    }
+
+    public void startGame(){
 
     }
-    public void start(){
+
+    public void advanceToTheNextLevel() {
 
     }
-    public boolean endLevel() {
+    public boolean isGameOver() {
         return false;
     }//returns if our character died or not
 

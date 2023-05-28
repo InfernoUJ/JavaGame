@@ -16,7 +16,8 @@ public class Level {
     public List<Enemy> enemies = new ArrayList<>();
     public Player player;
     public List<Projectile> projectiles = new ArrayList<>();
-    public Level() {
+    private BlockOfTilesSupplier blockOfTilesSupplier;
+    public Level(int difficulty) {
 
     }
 
