@@ -9,8 +9,8 @@ public abstract class Tile extends Coordinates {
     /* @TODO
          -what if window size changes?
      */
-    public static final int width = Gdx.graphics.getWidth()/39;
-    public static final int length = Gdx.graphics.getHeight()/15;
+    public static final int width = 1;
+    public static final int length = 1;
 
     public Tile(int xCenterCoordinate, int yCenterCoordinate) {
         setxCenterCoordinate(xCenterCoordinate);
