@@ -14,5 +14,4 @@ public class GameScreen extends Stage {
 
         currentStage = new Stage(mainManager.viewport);
     }
-
 }
