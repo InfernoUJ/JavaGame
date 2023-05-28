@@ -8,7 +8,7 @@ import specificTiles.Wall;
 public class WallBlock2 extends BlockOfTiles {
 
 
-    WallBlock2(float xCenterCoordinate, float yCenterCoordinate) {
+    public WallBlock2(float xCenterCoordinate, float yCenterCoordinate) {
         super(xCenterCoordinate,yCenterCoordinate);
         internalTiles.add(new NormalTile((int)getxCenterCoordinate() - Tile.width , (int)getyCenterCoordinate() + Tile.length));
         internalTiles.add(new NormalTile((int)getxCenterCoordinate() , (int)getyCenterCoordinate() + Tile.length));

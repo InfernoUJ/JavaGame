@@ -5,7 +5,7 @@ import map.Tile;
 import specificTiles.*;
 
 public class EnemySpawnerBlock3 extends BlockOfTiles {
-    EnemySpawnerBlock3(float xCenterCoordinate, float yCenterCoordinate) {
+    public EnemySpawnerBlock3(float xCenterCoordinate, float yCenterCoordinate) {
         super(xCenterCoordinate,yCenterCoordinate);
         internalTiles.add(new Spikes((int)getxCenterCoordinate() - Tile.width , (int)getyCenterCoordinate() + Tile.length));
         internalTiles.add(new EnemySpawner((int)getxCenterCoordinate() , (int)getyCenterCoordinate() + Tile.length));
