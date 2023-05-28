@@ -18,10 +18,21 @@ public class Level {
     public List<Projectile> projectiles = new ArrayList<>();
     private BlockOfTilesSupplier blockOfTilesSupplier;
     public Level(int difficulty) {
-
+        blockOfTilesSupplier = new BlockOfTilesSupplier();
+        blockOfTilesSupplier.setEnemyChance(Math.min(difficulty,100));
+        blockOfTilesSupplier.setTrapChance(Math.min(difficulty,100 - blockOfTilesSupplier.getEnemyChance()));
+        blockOfTilesSupplier.setHealingCampChance(Math.max(5,100 - blockOfTilesSupplier.getTrapChance()));
+        blockOfTilesSupplier.setWallChance(3);
+        while(enemies.isEmpty()) {
+            player = null;
+            board = new Board(blockOfTilesSupplier);
+            placeAllCharacters();
+        }
     }
 
-    public void startLevel() {
+
+    private void placeAllCharacters() {
+
 
     }
 

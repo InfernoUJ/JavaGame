@@ -1,5 +1,6 @@
 package characters;
 
+import level.Level;
 import projectiles.BigAoeAttack;
 import projectiles.PlayerProjectile;
 

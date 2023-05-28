@@ -23,6 +23,7 @@ public class BlockOfTilesSupplier {
 
     public BlockOfTiles generateBlock(int xCenterCoordinate, int yCenterCoordinate) {
         // add randomization in future
+
         return new NormalBlock(xCenterCoordinate, yCenterCoordinate);
     }
 

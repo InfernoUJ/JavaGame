@@ -16,7 +16,8 @@ public class Board extends Coordinates {
     public List<BlockOfTiles> blocks = new ArrayList<>(5*13);
 
     public Board(BlockOfTilesSupplier blockOfTilesSupplier){
-
+        setxCenterCoordinate(0);
+        setyCenterCoordinate(0);
     }
     @Override
     public int getWidth() {
