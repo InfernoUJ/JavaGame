@@ -8,7 +8,7 @@ import projectiles.PlayerProjectile;
 public class Enemy extends Person{
 
 
-    public Enemy(int xCenterCoordinate, int yCenterCoordinate) {
+    public Enemy(float xCenterCoordinate, float yCenterCoordinate) {
         super(xCenterCoordinate, yCenterCoordinate);
     }
 

@@ -9,22 +9,22 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public  abstract class Person extends Coordinates implements Movable {
     int speed = 0;
-    Pair<Integer,Integer> direction;
+    private Pair<Float,Float> direction = Pair.of(0f,0f);
     public Level level;
-    private int shootingCooldown;
+    private int shootingCooldown = 1;
     int healthPoints;
-    public Person(int xCenterCoordinate, int yCenterCoordinate) {
+    public Person(float xCenterCoordinate, float yCenterCoordinate) {
         super(xCenterCoordinate,yCenterCoordinate);
     }
     public void setShootingCooldown(int cd) {
-
+        shootingCooldown =cd;
     }
 
     public int getShootingCooldown() {
         return shootingCooldown;
     }
     public void decrementCdByOne() {
-
+        shootingCooldown--;
     }
 
     public int getHealthPoints() {
@@ -35,26 +35,29 @@ public  abstract class Person extends Coordinates implements Movable {
         this.healthPoints = healthPoints;
     }
     public void getHit(int damage) {
-
+        healthPoints-=damage;
+        if(healthPoints < 0) {
+            stopMoving();
+        }
     }
     public abstract void shoot(Pair<Float,Float> direction);
     @Override
     public void setSpeed(int speed) {
-
+        this.speed = speed;
     }
 
     @Override
     public int getSpeed() {
-        return 0;
+        return speed;
     }
 
     @Override
     public void setDirection(Pair<Float, Float> direction) {
-
+        this.direction = direction;
     }
 
     @Override
     public Pair<Float, Float> getDirection() {
-        return null;
+        return direction;
     }
 }

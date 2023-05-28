@@ -8,7 +8,7 @@ public class Player extends Person{
 
     private int bigAoeCooldown;
 
-    public Player(int xCenterCoordinate, int yCenterCoordinate) {
+    public Player(float xCenterCoordinate, float yCenterCoordinate) {
         super(xCenterCoordinate, yCenterCoordinate);
     }
 
