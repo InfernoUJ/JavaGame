@@ -5,9 +5,6 @@ import level.Level;
 public class Game {
     private Level level;
     private int levelNumber;
-    public Level generateLevel() {
-        return null;
-    }
     public Level getCurrentLevel() {
         return level;
     }
@@ -16,14 +13,28 @@ public class Game {
     }
 
     public void startGame(){
-
+        if (level != null) {
+            throw new IllegalStateException("game already started, cannot start again");
+        }
+        levelNumber = 1;
+        level = new Level(levelNumber);
     }
 
     public void advanceToTheNextLevel() {
-
+        if(level==null) {
+            throw new IllegalStateException("cannot advance to the next level, game finished or not started");
+        }
+        levelNumber++;
+        level = new Level(levelNumber);
     }
     public boolean isGameOver() {
-        return false;
-    }//returns if our character died or not
+        if(level == null) {
+            throw new IllegalStateException("level is null");
+        }
+        if(level.player.getHealthPoints() > 0) {
+            return false;
+        }
+        return true;
+    }//returns if our character is dead or not
 
 }

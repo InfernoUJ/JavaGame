@@ -12,6 +12,10 @@ public abstract class BlockOfTiles extends Coordinates {
     private final static int length = 3*Tile.length;
     public final List<Tile> internalTiles= new ArrayList<>();
 
+    public BlockOfTiles(float xCenterCoordinate, float yCenterCoordinate) {
+        super(xCenterCoordinate, yCenterCoordinate);
+    }
+
     @Override
     public int getWidth() {
         return width;

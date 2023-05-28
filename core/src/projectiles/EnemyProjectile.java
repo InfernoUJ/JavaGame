@@ -6,7 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 public class EnemyProjectile extends Projectile {
 
 
-    EnemyProjectile(float xCenterCoordinates, float yCenterCoordinates,int speed ,Pair<Float,Float> direction, int damage) {
+    public EnemyProjectile(float xCenterCoordinates, float yCenterCoordinates, int speed, Pair<Float, Float> direction, int damage) {
         super(xCenterCoordinates, yCenterCoordinates,speed, direction, damage);
 
     }
