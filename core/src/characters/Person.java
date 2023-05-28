@@ -1,5 +1,6 @@
 package characters;
 
+import level.Level;
 import projectiles.Projectile;
 
 import coreStructures.Coordinates;
@@ -9,6 +10,7 @@ import org.apache.commons.lang3.tuple.Pair;
 public  abstract class Person extends Coordinates implements Movable {
     int speed;
     Pair<Integer,Integer> direction;
+    public Level level;
     private int shootingCooldown;
     int healthPoints;
     public Person(int xCenterCoordinate, int yCenterCoordinate) {
@@ -36,7 +38,7 @@ public  abstract class Person extends Coordinates implements Movable {
     public void getHit(int damage) {
 
     }
-    public abstract Projectile shoot(float a,float b);
+    public abstract void shoot(Pair<Float,Float> direction);
     @Override
     public void setSpeed(int speed) {
 

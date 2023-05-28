@@ -5,9 +5,6 @@ import level.Level;
 public class Game {
     private Level level;
     private int levelNumber;
-    public Level generateLevel() {
-        return null;
-    }
     public Level getCurrentLevel() {
         return level;
     }
