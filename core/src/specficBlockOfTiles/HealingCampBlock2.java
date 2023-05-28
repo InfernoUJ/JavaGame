@@ -6,9 +6,8 @@ import specificTiles.*;
 
 public class HealingCampBlock2 extends BlockOfTiles {
 
-    HealingCampBlock2(int xCenterCoordinate, int yCenterCoordinate) {
-        setxCenterCoordinate(xCenterCoordinate);
-        setyCenterCoordinate(yCenterCoordinate);
+    HealingCampBlock2(float xCenterCoordinate, float yCenterCoordinate) {
+        super(xCenterCoordinate,yCenterCoordinate);
         internalTiles.add(new Spikes((int)getxCenterCoordinate() - Tile.width , (int)getyCenterCoordinate() + Tile.length));
         internalTiles.add(new SlowingTrap((int)getxCenterCoordinate() , (int)getyCenterCoordinate() + Tile.length));
         internalTiles.add(new Spikes((int)getxCenterCoordinate() + Tile.width , (int)getyCenterCoordinate() + Tile.length));

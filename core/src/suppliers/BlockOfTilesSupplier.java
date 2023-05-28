@@ -21,7 +21,7 @@ public class BlockOfTilesSupplier {
         enemyChance = 0;
     }
 
-    public BlockOfTiles generateBlock(int xCenterCoordinate, int yCenterCoordinate) {
+    public BlockOfTiles generateBlock(float xCenterCoordinate, float yCenterCoordinate) {
         // add randomization in future
 
         return new NormalBlock(xCenterCoordinate, yCenterCoordinate);

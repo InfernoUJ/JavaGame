@@ -7,9 +7,8 @@ import specificTiles.NormalTile;
 
 public class HealingCampBlock1 extends BlockOfTiles{
 
-    HealingCampBlock1(int xCenterCoordinate, int yCenterCoordinate) {
-        setxCenterCoordinate(xCenterCoordinate);
-        setyCenterCoordinate(yCenterCoordinate);
+    HealingCampBlock1(float xCenterCoordinate, float yCenterCoordinate) {
+        super(xCenterCoordinate,yCenterCoordinate);
         internalTiles.add(new NormalTile((int)getxCenterCoordinate() - Tile.width , (int)getyCenterCoordinate() + Tile.length));
         internalTiles.add(new NormalTile((int)getxCenterCoordinate() , (int)getyCenterCoordinate() + Tile.length));
         internalTiles.add(new NormalTile((int)getxCenterCoordinate() + Tile.width , (int)getyCenterCoordinate() + Tile.length));

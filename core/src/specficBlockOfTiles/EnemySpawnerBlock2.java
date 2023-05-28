@@ -7,9 +7,8 @@ import specificTiles.NormalTile;
 import specificTiles.Wall;
 
 public class EnemySpawnerBlock2 extends BlockOfTiles {
-    EnemySpawnerBlock2(int xCenterCoordinate, int yCenterCoordinate) {
-        setxCenterCoordinate(xCenterCoordinate);
-        setyCenterCoordinate(yCenterCoordinate);
+    EnemySpawnerBlock2(float xCenterCoordinate, float yCenterCoordinate) {
+        super(xCenterCoordinate,yCenterCoordinate);
         internalTiles.add(new Wall((int)getxCenterCoordinate() - Tile.width , (int)getyCenterCoordinate() + Tile.length));
         internalTiles.add(new NormalTile((int)getxCenterCoordinate() , (int)getyCenterCoordinate() + Tile.length));
         internalTiles.add(new Wall((int)getxCenterCoordinate() + Tile.width , (int)getyCenterCoordinate() + Tile.length));

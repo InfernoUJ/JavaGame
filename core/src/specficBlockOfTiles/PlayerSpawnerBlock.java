@@ -6,9 +6,8 @@ import specificTiles.NormalTile;
 import specificTiles.PlayerSpawner;
 
 public class PlayerSpawnerBlock extends BlockOfTiles {
-    public PlayerSpawnerBlock(int xCenterCoordinate, int yCenterCoordinate) {
-        setxCenterCoordinate(xCenterCoordinate);
-        setyCenterCoordinate(yCenterCoordinate);
+    public PlayerSpawnerBlock(float xCenterCoordinate, float yCenterCoordinate) {
+        super(xCenterCoordinate,yCenterCoordinate);
         internalTiles.add(new NormalTile((int)getxCenterCoordinate() - Tile.width , (int)getyCenterCoordinate() + Tile.length));
         internalTiles.add(new NormalTile((int)getxCenterCoordinate() , (int)getyCenterCoordinate() + Tile.length));
         internalTiles.add(new NormalTile((int)getxCenterCoordinate() + Tile.width , (int)getyCenterCoordinate() + Tile.length));

@@ -8,7 +8,7 @@ import coreStructures.Movable;
 import org.apache.commons.lang3.tuple.Pair;
 
 public  abstract class Person extends Coordinates implements Movable {
-    int speed;
+    int speed = 0;
     Pair<Integer,Integer> direction;
     public Level level;
     private int shootingCooldown;

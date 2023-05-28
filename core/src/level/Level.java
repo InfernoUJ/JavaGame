@@ -7,7 +7,6 @@ import map.Board;
 import map.Tile;
 import projectiles.Projectile;
 import specificTiles.EnemySpawner;
-import specificTiles.PlayerSpawner;
 import suppliers.BlockOfTilesSupplier;
 
 import java.util.ArrayList;

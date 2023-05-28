@@ -16,8 +16,12 @@ public class Board extends Coordinates {
     public List<BlockOfTiles> blocks = new ArrayList<>(5*13);
 
     public Board(BlockOfTilesSupplier blockOfTilesSupplier){
-        setxCenterCoordinate(0);
-        setyCenterCoordinate(0);
+        super(0,0);
+        for(int x = 0; x < 6;x++) {
+            for(int y = 0; y < 3;y++) {
+                blocks.add(blockOfTilesSupplier.generateBlock());
+            }
+        }
     }
     @Override
     public int getWidth() {
@@ -29,9 +33,6 @@ public class Board extends Coordinates {
         return 17*Tile.length;
     }
 
-    public void placeBlock(BlockOfTiles blockOfTiles, int rowNumber, int columNumber){
-        blocks.add(rowNumber*5 + columNumber, blockOfTiles);
-    }
     public void activateAllTraps() {
 
     }
