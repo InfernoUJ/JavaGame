@@ -26,7 +26,7 @@ public class Player extends Person{
     }
 
 
-    public void dectementBigAoeCdByOne() {
+    public void decrementBigAoeCdByOne() {
 
     }
 

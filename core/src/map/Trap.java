@@ -5,7 +5,7 @@ import characters.Person;
 public abstract class Trap extends Tile {
     private boolean activated = false;
     private int damage = 0;
-    protected Trap(int xCenterCoordinate, int yCenterCoordinate) {
+    protected Trap(float xCenterCoordinate, float yCenterCoordinate) {
         super(xCenterCoordinate,yCenterCoordinate);
     }
 
