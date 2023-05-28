@@ -17,11 +17,7 @@ public class Board extends Coordinates {
 
     public Board(BlockOfTilesSupplier blockOfTilesSupplier){
         super(0,0);
-        for(int x = 0; x < 6;x++) {
-            for(int y = 0; y < 3;y++) {
-                blocks.add(blockOfTilesSupplier.generateBlock());
-            }
-        }
+
     }
     @Override
     public int getWidth() {
