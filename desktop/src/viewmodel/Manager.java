@@ -18,7 +18,7 @@ public class Manager extends ScreenAdapter{
     public Viewport viewport;
     public Skin skin;
     StageWrapper startStage;
-    public ScreenAdapter gameScreen;
+    StageWrapper gameScreen;
 
     public Manager(final OurGame game) {
         this.game = game;
@@ -36,8 +36,8 @@ public class Manager extends ScreenAdapter{
     }
     public void startGame(){
         currentStage.dispose();
-        //gameScreen = new GameScreen(new GameManager(1));
-
+        gameScreen = new GameScreen(new GameManager(1, this));
+        currentStage = gameScreen.getStage();
     }
 
     @Override
