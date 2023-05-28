@@ -6,6 +6,10 @@ public abstract class Coordinates {
 
     public abstract int getWidth();
     public abstract int getLength();
+    public Coordinates(float xCenterCoordinate, float yCenterCoordinate) {
+        this.xCenterCoordinate = xCenterCoordinate;
+        this.yCenterCoordinate = yCenterCoordinate;
+    }
 
     public float getxCenterCoordinate() {
         return xCenterCoordinate;

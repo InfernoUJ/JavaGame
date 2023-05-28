@@ -14,8 +14,7 @@ public  abstract class Person extends Coordinates implements Movable {
     private int shootingCooldown;
     int healthPoints;
     public Person(int xCenterCoordinate, int yCenterCoordinate) {
-        this.setxCenterCoordinate(xCenterCoordinate);
-        this.setyCenterCoordinate(yCenterCoordinate);
+        super(xCenterCoordinate,yCenterCoordinate);
     }
     public void setShootingCooldown(int cd) {
 
