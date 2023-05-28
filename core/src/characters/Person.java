@@ -13,6 +13,17 @@ public  abstract class Person extends Coordinates implements Movable {
     public Level level;
     private int shootingCooldown = 1;
     int healthPoints;
+
+    @Override
+    public int getWidth() {
+        return 1;
+    }
+
+    @Override
+    public int getLength() {
+        return 1;
+    }
+
     public Person(float xCenterCoordinate, float yCenterCoordinate) {
         super(xCenterCoordinate,yCenterCoordinate);
     }

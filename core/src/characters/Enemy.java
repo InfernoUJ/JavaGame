@@ -3,7 +3,7 @@ package characters;
 import level.Level;
 import org.apache.commons.lang3.tuple.Pair;
 import projectiles.EnemyProjectile;
-import projectiles.PlayerProjectile;
+
 
 public class Enemy extends Person{
 
@@ -17,17 +17,12 @@ public class Enemy extends Person{
         if(level == null) {
             throw new IllegalStateException("enemy has no level");
         }
+        if(getShootingCooldown()>0) {
+            return;
+        }
         level.projectiles.add(new EnemyProjectile(getxCenterCoordinate(),getyCenterCoordinate(),1,direction,1));
     }
 
 
-    @Override
-    public int getWidth() {
-        return 1;
-    }
 
-    @Override
-    public int getLength() {
-        return 1;
-    }
 }

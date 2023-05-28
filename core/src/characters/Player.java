@@ -27,12 +27,15 @@ public class Player extends Person{
 
 
     public void decrementBigAoeCdByOne() {
-
+        bigAoeCooldown--;
     }
 
     public void shootBigAoeAttack(float xCoordinate, float yCoordinate, int radius) {
         if(level == null) {
             throw new IllegalStateException("player has no level");
+        }
+        if(bigAoeCooldown> 0) {
+            return;
         }
         level.projectiles.add(new BigAoeAttack(xCoordinate,yCoordinate,radius,1));
     }
@@ -41,16 +44,12 @@ public class Player extends Person{
         if(level == null) {
             throw new IllegalStateException("player has no level");
         }
+        if(getShootingCooldown()>0) {
+            return;
+        }
         level.projectiles.add(new PlayerProjectile(getxCenterCoordinate(),getyCenterCoordinate(),1,direction,1));
     }
 
-    @Override
-    public int getWidth() {
-        return 0;
-    }
 
-    @Override
-    public int getLength() {
-        return 0;
-    }
 }
+
