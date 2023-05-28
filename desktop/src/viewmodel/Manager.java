@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import coreStructures.OurGame;
 import view.GameScreen;
+import view.StageWrapper;
 import view.StartMenuScreen;
 
 public class Manager extends ScreenAdapter{
@@ -16,7 +17,8 @@ public class Manager extends ScreenAdapter{
     public Stage currentStage;
     public Viewport viewport;
     public Skin skin;
-    StartMenuScreen startStage;
+    StageWrapper startStage;
+    public ScreenAdapter gameScreen;
 
     public Manager(final OurGame game) {
         this.game = game;
@@ -25,7 +27,7 @@ public class Manager extends ScreenAdapter{
         skin = new Skin(Gdx.files.internal("uiskin.json"));
 
         startStage = new StartMenuScreen(this);
-        currentStage = startStage.currentStage;
+        currentStage = startStage.getStage();
 
         Gdx.input.setInputProcessor(currentStage);
     }
@@ -34,8 +36,8 @@ public class Manager extends ScreenAdapter{
     }
     public void startGame(){
         currentStage.dispose();
-        currentStage = new GameScreen(this, new GameManager()).currentStage;
-        Gdx.input.setInputProcessor(currentStage);
+        //gameScreen = new GameScreen(new GameManager(1));
+
     }
 
     @Override
@@ -43,7 +45,7 @@ public class Manager extends ScreenAdapter{
         super.render(delta);
         ScreenUtils.clear(0, 0.2f, 0.1f, 1);
 
-        currentStage.act();
+        currentStage.act(delta);
         currentStage.draw();
     }
 
@@ -57,6 +59,5 @@ public class Manager extends ScreenAdapter{
     public void dispose() {
         super.dispose();
         currentStage.dispose();
-        startStage.dispose();
     }
 }

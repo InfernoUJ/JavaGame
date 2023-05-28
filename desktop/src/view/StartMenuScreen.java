@@ -1,5 +1,6 @@
 package view;
 
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.Gdx;
@@ -8,11 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import viewmodel.Manager;
 
-public class StartMenuScreen extends Stage{
+public class StartMenuScreen extends StageWrapper {
     private Manager mainManager;
-    public Stage currentStage;
-
     public StartMenuScreen(Manager mainManager){
+        super();
         this.mainManager = mainManager;
 
         currentStage = new Stage(mainManager.viewport);
