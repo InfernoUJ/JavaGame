@@ -2,14 +2,14 @@ package viewmodel;
 
 import characters.Player;
 import level.Level;
-import suppliers.LevelSupplier;
+import mainGame.Game;
 
 public class GameManager {
     private Player player;
     private Level level;
-    private LevelSupplier levelSupplier;
+    private Game game;
     GameManager(){
-        levelSupplier = new LevelSupplier();
-        level = levelSupplier.generateLevel();
+        game = new Game();
+        level = game.generateLevel();
     }
 }

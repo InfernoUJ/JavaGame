@@ -5,7 +5,7 @@ import level.Level;
 public class Game {
     public Level level;
     public int levelNumber;
-    public Level levelGenerator() {
+    public Level generateLevel() {
         return null;
     }
     public void endTheGame(){
@@ -16,6 +16,6 @@ public class Game {
     }
     public boolean endLevel() {
         return false;
-    }
+    }//returns if our character died or not
 
 }
