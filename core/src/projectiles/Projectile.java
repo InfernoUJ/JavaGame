@@ -24,6 +24,7 @@ public abstract class Projectile extends Coordinates implements Movable {
     }
 
     public Projectile(float xCenterCoordinates, float yCenterCoordinates, int speed, Pair<Float,Float> direction, int damage) {
+        super(xCenterCoordinates,yCenterCoordinates);
         if(speed < 0) {
             throw new IllegalArgumentException("Projectile - cannot give negative speed to a projectile");
         }

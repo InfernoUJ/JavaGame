@@ -1,6 +1,7 @@
 package projectiles;
 
 import characters.Person;
+import characters.Player;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class PlayerProjectile extends Projectile{
@@ -10,7 +11,10 @@ public class PlayerProjectile extends Projectile{
 
     @Override
     void hit(Person a) {
-
+        if(a instanceof Player) {
+            return;
+        }
+        a.getHit(getDamage());
     }
 
 
