@@ -14,7 +14,7 @@ public class Board extends Coordinates {
     // Size of Board is 15 x 39 Tiles
     // or 5 x 13 Blocks
 
-    // Imagine its is matrix with dimensions 5 x 13
+    // Imagine its is matrix with dimensions 5 x 13 with artificial walls around it
     public List<BlockOfTiles> blocks = new ArrayList<>(7*15);
 
     public Board(BlockOfTilesSupplier blockOfTilesSupplier){
@@ -48,12 +48,12 @@ public class Board extends Coordinates {
     }
     @Override
     public int getWidth() {
-        return 41 * Tile.width;
+        return 15 * BlockOfTiles.width;
     }
 
     @Override
     public int getLength() {
-        return 17*Tile.length;
+        return 7*BlockOfTiles.length;
     }
 
     public void activateAllTraps() {
