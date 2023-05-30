@@ -1,6 +1,7 @@
 package map;
 
 import coreStructures.Coordinates;
+import specficBlockOfTiles.FullWallBlock;
 import specficBlockOfTiles.PlayerSpawnerBlock;
 import suppliers.BlockOfTilesSupplier;
 
@@ -14,15 +15,21 @@ public class Board extends Coordinates {
     // or 5 x 13 Blocks
 
     // Imagine its is matrix with dimensions 5 x 13
-    public List<BlockOfTiles> blocks = new ArrayList<>(5*13);
+    public List<BlockOfTiles> blocks = new ArrayList<>(7*15);
 
     public Board(BlockOfTilesSupplier blockOfTilesSupplier){
         super(0,0);
-        for(int x = 0; x < 13;x++) {
-            for (int y = 0; y < 2; y++) {
+        for(int i = 0; i < 15;i++) {
+            blocks.add(new FullWallBlock(-7*BlockOfTiles.width + i*BlockOfTiles.width,3) );
+        }
+        for(int y = 0; y < 2;y++) {
+            blocks.add(new FullWallBlock(-7*BlockOfTiles.width, 2 * BlockOfTiles.length - y*BlockOfTiles.length));
+            for (int x = 0; x < 13; x++) {
                blocks.add(blockOfTilesSupplier.generateBlock(-6 * BlockOfTiles.width + x*BlockOfTiles.width, 2 * BlockOfTiles.length - y*BlockOfTiles.length));
             }
+            blocks.add(new FullWallBlock(7*BlockOfTiles.width,2 * BlockOfTiles.length - y*BlockOfTiles.length));
         }
+        blocks.add(new FullWallBlock(-7*BlockOfTiles.width,0));
         for(int x = 0; x < 6;x++) {
             blocks.add(blockOfTilesSupplier.generateBlock((-6 + x)* BlockOfTiles.width,0));
         }
@@ -30,10 +37,13 @@ public class Board extends Coordinates {
         for(int x = 7;x < 13;x++) {
             blocks.add(blockOfTilesSupplier.generateBlock((-6 + x)* BlockOfTiles.width,0));
         }
-        for(int x = 0; x < 13;x++) {
-            for (int y = 3; y < 5; y++) {
+        blocks.add(new FullWallBlock(7*BlockOfTiles.width,0));
+        for(int y = 3; y< 5;y++) {
+            blocks.add(new FullWallBlock(-7*BlockOfTiles.width, 2 * BlockOfTiles.length - y*BlockOfTiles.length));
+            for (int x = 0; x < 13; x++) {
                 blocks.add(blockOfTilesSupplier.generateBlock(-6 * BlockOfTiles.width + x*BlockOfTiles.width, 2 * BlockOfTiles.length - y*BlockOfTiles.length));
             }
+            blocks.add(new FullWallBlock(7*BlockOfTiles.width,2 * BlockOfTiles.length - y*BlockOfTiles.length));
         }
     }
     @Override

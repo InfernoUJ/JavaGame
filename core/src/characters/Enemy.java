@@ -8,9 +8,11 @@ import projectiles.EnemyProjectile;
 public class Enemy extends Person{
 
 
+
     public Enemy(float xCenterCoordinate, float yCenterCoordinate) {
         super(xCenterCoordinate, yCenterCoordinate);
     }
+
 
     @Override
     public void shoot(Pair<Float,Float> direction) {
