@@ -5,7 +5,12 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.Map;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -16,7 +21,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor{
     private GameManager gameManager;
     private Stage currentStage;
     private Hero hero;
-
+    private Map map;
+    private OrthographicCamera camera;
+    private OrthogonalTiledMapRenderer mapRenderer;
     public GameScreen(GameManager gameManager) {
         super();
         this.gameManager = gameManager;
@@ -26,6 +33,21 @@ public class GameScreen extends ScreenAdapter implements InputProcessor{
 
     private void loadScene(){
         currentStage = new Stage(gameManager.getViewport());
+
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        // Set the camera's initial position and other properties as needed
+        camera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
+        camera.update();
+
+        TiledMap map = new TmxMapLoader().load("simple_map.tmx");
+        mapRenderer = new OrthogonalTiledMapRenderer(map);
+        currentStage.addActor(new Actor(){
+            @Override
+            public void draw(com.badlogic.gdx.graphics.g2d.Batch batch, float parentAlpha) {
+                mapRenderer.setView(camera);
+                mapRenderer.render();
+            }
+        });
 //        hero = new Hero(gameManager);
 //        hero.addListener(new InputListener(){
 //            @Override
@@ -46,6 +68,12 @@ public class GameScreen extends ScreenAdapter implements InputProcessor{
         currentStage.act(delta);
         currentStage.draw();
     }
+
+    @Override
+    public void resize(int width, int height) {
+        currentStage.getViewport().update(width, height, true);
+    }
+
     @Override
     public boolean keyDown(int keycode) {
         return false;

@@ -16,6 +16,7 @@ public class GameManager {
     private final Screen gameScreen;
     GameManager(Manager mainManager){
         game = new Game();
+        game.startGame();
         this.mainManager = mainManager;
         gameScreen = new GameScreen(this);
     }

@@ -1,0 +1,27 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+    },
+    "last.imagePath": "/home/inferno/uj/PO/project/game/JavaGame/assets",
+    "map.height": 15,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 72,
+    "map.tileWidth": 49,
+    "map.width": 39,
+    "openFiles": [
+    ],
+    "project": "map.tiled-project",
+    "recentFiles": [
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 72,
+        "width": 49
+    }
+}
