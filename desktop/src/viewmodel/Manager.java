@@ -20,6 +20,7 @@ public class Manager {
     public Skin skin;
     private Screen startMenuScreen;
     private Screen gameScreen;
+    private GameManager gameManager;
 
     public Manager(final OurGame game) {
         this.game = game;
@@ -43,9 +44,9 @@ public class Manager {
         Gdx.app.exit();
     }
     public void startGame(){
-        //currentStage.dispose();
-        // gameScreen = new GameScreen(new GameManager( this));
-        //currentStage = gameScreen.getStage();
+        startMenuScreen.dispose();
+        gameManager = new GameManager(this);
+        currentScreen = gameManager.getGameScreen();
     }
 
 //    @Override
