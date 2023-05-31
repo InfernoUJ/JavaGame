@@ -6,25 +6,33 @@ import viewmodel.Manager;
 
 public class OurGame extends Game {
 	public SpriteBatch batch;
-	public Manager mainMenuScreen;
+	public Manager mainManager;
+
+
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		mainMenuScreen = new Manager(this);
+		mainManager = new Manager(this);
 
-		this.setScreen(mainMenuScreen);
+		this.setScreen(mainManager.currentScreen);
 	}
 
 	@Override
 	public void render () {
-		super.render();
+		if(mainManager.currentScreen != null) {
+			super.render();
+			if (getScreen() != mainManager.currentScreen) {
+				System.out.println("Rendering ScreenGame");
+				setScreen(mainManager.currentScreen);
+			}
+		}
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		mainMenuScreen.dispose();
+		mainManager.dispose();
 	}
 
 

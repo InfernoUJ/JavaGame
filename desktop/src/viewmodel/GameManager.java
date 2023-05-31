@@ -4,18 +4,18 @@ import characters.Player;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import level.Level;
+import mainGame.Game;
 
 public class GameManager {
-    private Player player;
-    private Level level;
-    private Manager mainManager;
-    GameManager(int difficulty, Manager mainManager){
-        level = new Level(difficulty);
+    private final Game game;
+    private final Manager mainManager;
+    GameManager(Manager mainManager){
+        game = new Game();
         this.mainManager = mainManager;
     }
 
     public Player getPlayer() {
-        return player;
+        return game.getCurrentLevel().player;
     }
 
 
