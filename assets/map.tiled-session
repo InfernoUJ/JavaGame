@@ -3,10 +3,35 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "simple_map.tmx",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
+        "defaultTilesets.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "floor.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "floor2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "simple tile.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "simple_map.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 908,
+                "y": 591
+            }
+        }
     },
     "last.imagePath": "/home/inferno/uj/PO/project/game/JavaGame/assets",
     "map.height": 15,
@@ -15,9 +40,17 @@
     "map.tileWidth": 49,
     "map.width": 39,
     "openFiles": [
+        "simple_map.tmx",
+        "floor.tsx",
+        "floor2.tsx"
     ],
     "project": "map.tiled-project",
     "recentFiles": [
+        "floor2.tsx",
+        "floor.tsx",
+        "simple_map.tmx",
+        "defaultTilesets.tsx",
+        "simple tile.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
