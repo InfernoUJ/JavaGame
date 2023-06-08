@@ -44,21 +44,6 @@ public class Manager {
         currentScreen = gameManager.getGameScreen();
     }
 
-//    @Override
-//    public void render(float delta){
-//        super.render(delta);
-//        ScreenUtils.clear(0, 0.2f, 0.1f, 1);
-//
-//        currentStage.act(delta);
-//        currentStage.draw();
-//    }
-//
-//    @Override
-//    public void resize(int width, int height) {
-//        super.resize(width, height);
-//        currentStage.getViewport().update(width, height, true);
-//    }
-
     public void dispose() {
         // @TODO
     }

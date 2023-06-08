@@ -8,12 +8,22 @@ import viewmodel.GameManager;
 
 public class Hero extends Actor {
     private final TextureRegion texture;
-    public Hero(){
+    private final GameManager gameManager;
+    public Hero(GameManager gameManager){
         super();
         texture = new TextureRegion(new Texture("hero.png"));
+        this.gameManager = gameManager;
     }
 
+    @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(texture, getX(), getY());
+        batch.draw(texture, gameManager.getHeroXCoordinate(), gameManager.getHeroYCoordinate());
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        setX(gameManager.getHeroXCoordinate());
+        setY(gameManager.getHeroYCoordinate());
     }
 }

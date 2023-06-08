@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import viewmodel.GameManager;
 
-public class GameScreen extends ScreenAdapter implements InputProcessor{
+public class GameScreen extends ScreenAdapter {
     private GameManager gameManager;
     private Stage currentStage;
     private Hero hero;
@@ -47,7 +47,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor{
         });
 
 
-        hero = new Hero();
+        hero = new Hero(gameManager);
         currentStage.addActor(hero);
     }
     @Override
@@ -58,20 +58,20 @@ public class GameScreen extends ScreenAdapter implements InputProcessor{
         Gdx.gl.glClearColor(0,  1, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        //TODO: use delta time
-        //TODO: do not hardcode speed
-        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
-            hero.setY(hero.getY() + 5);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-            hero.setY(hero.getY() - 5);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-            hero.setX(hero.getX() - 5);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
-            hero.setX(hero.getX() + 5);
-        }
+//        //TODO: use delta time
+//        //TODO: do not hardcode speed
+//        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+//            hero.setY(hero.getY() + 5);
+//        }
+//        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+//            hero.setY(hero.getY() - 5);
+//        }
+//        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
+//            hero.setX(hero.getX() - 5);
+//        }
+//        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+//            hero.setX(hero.getX() + 5);
+//        }
 
         currentStage.act(delta);
         currentStage.draw();
@@ -82,43 +82,4 @@ public class GameScreen extends ScreenAdapter implements InputProcessor{
         currentStage.getViewport().update(width, height, true);
     }
 
-    @Override
-    public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(float amountX, float amountY) {
-        return false;
-    }
 }

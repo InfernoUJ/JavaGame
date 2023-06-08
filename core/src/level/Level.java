@@ -43,8 +43,8 @@ public class Level {
 
             }
         }
-        Player player1 = new Player(0, 0);
-        player1.level = this;
+        player = new Player(0, 0);
+        player.level = this;
 
     }
 
