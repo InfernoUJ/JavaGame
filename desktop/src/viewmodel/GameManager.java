@@ -4,11 +4,9 @@ import characters.Player;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import level.Level;
 import mainGame.Game;
 import view.GameScreen;
 
-import javax.script.ScriptEngine;
 
 public class GameManager {
     private final Game game;
