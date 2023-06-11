@@ -1,5 +1,6 @@
 package viewmodel;
 
+import characters.Person;
 import characters.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -62,5 +63,9 @@ public class GameManager {
 
     public float getHeroYCoordinate(){
         return game.getCurrentLevel().player.getyCenterCoordinate();
+    }
+
+    public Person getHero() {
+        return game.getCurrentLevel().player;
     }
 }
