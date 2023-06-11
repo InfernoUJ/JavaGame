@@ -1,5 +1,6 @@
 package viewmodel;
 
+import characters.Enemy;
 import characters.Person;
 import characters.Player;
 import com.badlogic.gdx.Gdx;
@@ -104,6 +105,13 @@ public class GameManager {
             getPlayer().shoot(org.apache.commons.lang3.tuple.Pair.of(closestEnemy.getxCenterCoordinate(), closestEnemy.getyCenterCoordinate()));
             getPlayer().setShootingCooldown(getPlayer().basicShootingCooldown);
         }
+
+        for(Person enemy : game.getCurrentLevel().enemies) {
+            if(enemy.getShootingCooldown() <= 0){
+                enemy.shoot(Pair.of(getHeroXCoordinate(), getHeroYCoordinate()));
+                enemy.setShootingCooldown(enemy.basicShootingCooldown);
+            }
+        }
     }
 
     private Person findClosestEnemy() {
@@ -127,9 +135,19 @@ public class GameManager {
     }
 
     private void moveAllProjectTiles(float delta){
+        List<Projectile> toRemove = new ArrayList<>();
         for (Projectile p : game.getCurrentLevel().projectiles) {
             p.move(delta);
+            if(isOutOfMap(p)){
+                toRemove.add(p);
+            }
         }
+        game.getCurrentLevel().projectiles.removeAll(toRemove);
+    }
+
+    private boolean isOutOfMap(Coordinates p){
+        return p.getxCenterCoordinate() < 0 || p.getxCenterCoordinate() > 1920
+                || p.getyCenterCoordinate() < 0 || p.getyCenterCoordinate() > 1080;
     }
 
     private void hitEveryone(){
