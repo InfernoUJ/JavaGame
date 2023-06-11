@@ -18,26 +18,32 @@ public class Character extends Actor {
         this.myhero = myhero;
         this.texture = texture;
         this.hpBar = new HpBar(100, 10, com.badlogic.gdx.graphics.Color.BLACK, com.badlogic.gdx.graphics.Color.GREEN);
-        hpBar.setX(getX());
-        hpBar.setY(getY() + texture.getTexture().getHeight() +100);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, myhero.getxCenterCoordinate(), myhero.getyCenterCoordinate());
-        //hpBar.setCurrentValue((float)myhero.getHealthPoints() / (float)gameManager.maxHealthPoints);
-        hpBar.setX(getX());
-        hpBar.setY(getY() + texture.getTexture().getHeight() +100);
+        hpBar.setCurrentValue((float)myhero.getHealthPoints() / (float)gameManager.maxHealthPoints);
+
+            if(myhero instanceof characters.Enemy){
+                System.out.print("Enemy hp: ");
+            }
+            else {
+                System.out.print("Hero hp: ");
+            }
+            System.out.println(hpBar.getX()+" "+hpBar.getY());
+            System.out.println(myhero.getHealthPoints());
+
         hpBar.draw(batch, parentAlpha);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        setX(gameManager.getHeroXCoordinate());
-        setY(gameManager.getHeroYCoordinate());
+        setX(myhero.getxCenterCoordinate());
+        setY(myhero.getyCenterCoordinate());
         hpBar.setX(getX());
-        hpBar.setY(getY() + texture.getTexture().getHeight() +100); // Position the hpBar below the character
+        hpBar.setY(getY() + texture.getTexture().getHeight() + 10); // Position the hpBar below the character
         hpBar.act(delta);
     }
 }

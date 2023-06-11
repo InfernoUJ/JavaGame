@@ -11,8 +11,9 @@ public  abstract class Person extends Coordinates implements Movable {
     int speed = 0;
     private Pair<Float,Float> direction = Pair.of(0f,0f);
     public Level level;
-    private int shootingCooldown = 1;
-    int healthPoints;
+    private float shootingCooldown = 1;
+    public final float basicShootingCooldown = 1;
+    int healthPoints = 100;
 
     @Override
     public int getWidth() {
@@ -27,15 +28,15 @@ public  abstract class Person extends Coordinates implements Movable {
     public Person(float xCenterCoordinate, float yCenterCoordinate) {
         super(xCenterCoordinate,yCenterCoordinate);
     }
-    public void setShootingCooldown(int cd) {
-        shootingCooldown =cd;
+    public void setShootingCooldown(float cd) {
+        shootingCooldown = cd;
     }
 
-    public int getShootingCooldown() {
+    public float getShootingCooldown() {
         return shootingCooldown;
     }
-    public void decrementCdByOne() {
-        shootingCooldown--;
+    public void decrementCd(float delta) {
+        shootingCooldown-=delta;
     }
 
     public int getHealthPoints() {

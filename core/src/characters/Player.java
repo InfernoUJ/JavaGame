@@ -6,28 +6,30 @@ import projectiles.PlayerProjectile;
 
 public class Player extends Person{
 
-    private int bigAoeCooldown;
+    private float bigAoeCooldown;
+    public final float basicBigAoeCooldown = 20;
 
     public Player(float xCenterCoordinate, float yCenterCoordinate) {
         super(xCenterCoordinate, yCenterCoordinate);
+        speed = 5;
     }
 
     @Override
-    public int getShootingCooldown() {
+    public float getShootingCooldown() {
         return super.getShootingCooldown();
     }
 
-    public int getBigAoeCooldown() {
+    public float getBigAoeCooldown() {
         return bigAoeCooldown;
     }
 
-    public void setBigAoeCooldown(int bigAoeCooldown) {
+    public void setBigAoeCooldown(float bigAoeCooldown) {
         this.bigAoeCooldown = bigAoeCooldown;
     }
 
 
-    public void decrementBigAoeCdByOne() {
-        bigAoeCooldown--;
+    public void decrementBigAoeCd(float delta) {
+        bigAoeCooldown-=delta;
     }
 
     public void shootBigAoeAttack(float xCoordinate, float yCoordinate, int radius) {

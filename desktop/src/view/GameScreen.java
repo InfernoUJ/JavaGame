@@ -67,6 +67,7 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         super.render(delta);
+        System.out.println(delta);
         // Set the background color
         // TODO: move it to textures and skin pack( or smth like that)
         Gdx.gl.glClearColor(0,  1, 0, 1);
@@ -74,8 +75,10 @@ public class GameScreen extends ScreenAdapter {
 
         //System.out.println("GameScreen render");
 
+
         currentStage.act(delta);
         currentStage.draw();
+        gameManager.makeShooting(delta);
     }
 
     @Override

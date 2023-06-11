@@ -48,16 +48,16 @@ public class GameManager {
     public void processKeyDown(int keyCode) {
         //System.out.println("Updated " + getHeroXCoordinate() +" "+ getHeroYCoordinate());
         if(keyCode == Input.Keys.W) {
-            game.getCurrentLevel().player.setyCenterCoordinate(getHeroYCoordinate() + 5);
+            game.getCurrentLevel().player.setyCenterCoordinate(getHeroYCoordinate() + getPlayer().getSpeed());
         }
         if(keyCode == Input.Keys.S) {
-            game.getCurrentLevel().player.setyCenterCoordinate(getHeroYCoordinate() - 5);
+            game.getCurrentLevel().player.setyCenterCoordinate(getHeroYCoordinate() - getPlayer().getSpeed());
         }
         if(keyCode == Input.Keys.D) {
-            game.getCurrentLevel().player.setxCenterCoordinate(getHeroXCoordinate() + 5);
+            game.getCurrentLevel().player.setxCenterCoordinate(getHeroXCoordinate() + getPlayer().getSpeed());
         }
         if(keyCode == Input.Keys.A) {
-            game.getCurrentLevel().player.setxCenterCoordinate(getHeroXCoordinate() - 5);
+            game.getCurrentLevel().player.setxCenterCoordinate(getHeroXCoordinate() - getPlayer().getSpeed());
         }
     }
 
@@ -82,5 +82,12 @@ public class GameManager {
             enemies.add(character);
         }
         return enemies;
+    }
+
+    public void makeShooting(float delta){
+        getPlayer().decrementBigAoeCd(delta);
+        getPlayer().decrementCd(delta);
+        //getPlayer().shoot();
+
     }
 }
