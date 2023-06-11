@@ -7,7 +7,7 @@ public class Mover<T> extends Thread{
     /*
         my bicycle
     */
-    private volatile boolean isStopped = false;
+    private boolean isStopped = false;
     private final T argument;
     // TODO: rewrite on Runnable, not Consumer
     private final Consumer<T> action;
@@ -18,13 +18,13 @@ public class Mover<T> extends Thread{
     }
 
     public void stopWork(){
-        System.out.println("    Stopping " + argument);
+        //System.out.println("    Stopping " + argument);
         isStopped = true;
     }
 
     public void run(){
         while (true){
-            System.out.println("    Running " + argument);
+            //System.out.println("    Running " + argument);
             if(!isStopped){
                 action.accept(argument);
             }
@@ -37,7 +37,7 @@ public class Mover<T> extends Thread{
     }
 
     public void resumeWork() {
-        System.out.println("    Resuming " + argument);
+        //System.out.println("    Resuming " + argument);
         isStopped = false;
     }
 }

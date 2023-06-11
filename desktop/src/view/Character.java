@@ -6,12 +6,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import viewmodel.GameManager;
 
-public class Hero extends Actor {
+public class Character extends Actor {
     private final TextureRegion texture;
     private final GameManager gameManager;
-    public Hero(GameManager gameManager){
+    public Character(GameManager gameManager){
         super();
-        texture = new TextureRegion(new Texture("hero.png"));
+        texture = new TextureRegion(new Texture("hero2.png"));
         this.gameManager = gameManager;
     }
 

@@ -12,6 +12,7 @@ import view.GameScreen;
 
 public class GameManager {
     private final Game game;
+    public final int maxHealthPoints = 100;
     private final Manager mainManager;
     private final Screen gameScreen;
     private final InputProcessor controller;

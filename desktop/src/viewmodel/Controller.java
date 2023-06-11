@@ -22,7 +22,6 @@ public class Controller extends InputAdapter {
         }
         else{
             mover.get(keyCode).resumeWork();
-            //mover.get(keyCode).run();
         }
     }
 
@@ -33,14 +32,14 @@ public class Controller extends InputAdapter {
     @Override
     public boolean keyDown(int keyCode) {
         // TODO:maybe change from void type to boolean
-        System.out.println("Updated " + gameManager.getHeroXCoordinate() +" "+ gameManager.getHeroYCoordinate());
+        //System.out.println("Updated " + gameManager.getHeroXCoordinate() +" "+ gameManager.getHeroYCoordinate());
         infiniteLoop(keyCode);
         return true;
     }
 
     @Override
     public boolean keyUp(int keyCode){
-        System.out.println("Upped " + keyCode);
+        //System.out.println("Upped " + keyCode);
         mover.get(keyCode).stopWork();
         return true;
     }

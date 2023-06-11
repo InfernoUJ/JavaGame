@@ -1,8 +1,6 @@
 package view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -17,7 +15,7 @@ import viewmodel.GameManager;
 public class GameScreen extends ScreenAdapter {
     private GameManager gameManager;
     private Stage currentStage;
-    private Hero hero;
+    private Character character;
     private Map map;
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer mapRenderer;
@@ -47,8 +45,8 @@ public class GameScreen extends ScreenAdapter {
         });
 
 
-        hero = new Hero(gameManager);
-        currentStage.addActor(hero);
+        character = new Character(gameManager);
+        currentStage.addActor(character);
     }
     @Override
     public void render(float delta) {
