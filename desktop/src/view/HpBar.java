@@ -32,7 +32,6 @@ public class HpBar extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        System.out.println("HpBar draw" + currentWidth + " " + height);
         batch.draw(foregroundTexture, getX(), getY(), currentWidth, height);
     }
 

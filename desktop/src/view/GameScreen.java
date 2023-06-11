@@ -14,6 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import viewmodel.GameManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameScreen extends ScreenAdapter {
     private GameManager gameManager;
     private Stage currentStage;
@@ -21,6 +24,8 @@ public class GameScreen extends ScreenAdapter {
     private Map map;
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer mapRenderer;
+    private Character hero;
+    private List<Character> enemies = new ArrayList<>();
     public GameScreen(GameManager gameManager) {
         super();
         this.gameManager = gameManager;
@@ -47,9 +52,17 @@ public class GameScreen extends ScreenAdapter {
             }
         });
 
-        character = new Character(gameManager, gameManager.getHero(), new TextureRegion(new Texture("hero2.png")));
-        currentStage.addActor(character);
+        hero = new Character(gameManager, gameManager.getPlayer(), new TextureRegion(new Texture("hero2.png")));
+        currentStage.addActor(hero);
 
+        loadEnemies();
+
+    }
+    private void loadEnemies(){
+        enemies = gameManager.loadEnemies();
+        for (Character enemy : enemies) {
+            currentStage.addActor(enemy);
+        }
     }
     @Override
     public void render(float delta) {

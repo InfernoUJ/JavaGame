@@ -6,9 +6,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import mainGame.Game;
+import view.Character;
 import view.GameScreen;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GameManager {
@@ -26,9 +32,13 @@ public class GameManager {
 
         this.mainManager = mainManager;
         gameScreen = new GameScreen(this);
+        System.out.println(numberOfEnemies());
     }
     public Player getPlayer() {
         return game.getCurrentLevel().player;
+    }
+    public int numberOfEnemies() {
+        return game.getCurrentLevel().enemies.size();
     }
 
     public Viewport getViewport(){
@@ -65,7 +75,12 @@ public class GameManager {
         return game.getCurrentLevel().player.getyCenterCoordinate();
     }
 
-    public Person getHero() {
-        return game.getCurrentLevel().player;
+    public List<Character> loadEnemies() {
+        List<Character> enemies = new ArrayList<>();
+        for(Person enemy : game.getCurrentLevel().enemies) {
+            Character character = new Character(this, enemy, new TextureRegion(new Texture("enemy1.png")));
+            enemies.add(character);
+        }
+        return enemies;
     }
 }
