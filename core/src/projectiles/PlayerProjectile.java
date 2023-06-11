@@ -17,8 +17,6 @@ public class PlayerProjectile extends Projectile{
         a.getHit(getDamage());
     }
 
-
-
     @Override
     public int getWidth() {
         return 1;

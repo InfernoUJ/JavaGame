@@ -9,9 +9,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import coreStructures.Coordinates;
+import jdk.jshell.PersistentSnippet;
 import mainGame.Game;
+import projectiles.Projectile;
 import view.Character;
 import view.GameScreen;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,9 +89,57 @@ public class GameManager {
     }
 
     public void makeShooting(float delta){
+        decrementAllCD(delta);
+        shootAllProjectiles();
+        moveAllProjectTiles(delta);
+        hitEveryone();
+    }
+
+    private void shootAllProjectiles() {
+        if(getPlayer().getShootingCooldown() <= 0){
+            Person closestEnemy = findClosestEnemy();
+            if (closestEnemy == null){
+                throw new RuntimeException("No enemies found");
+            }
+            getPlayer().shoot(org.apache.commons.lang3.tuple.Pair.of(closestEnemy.getxCenterCoordinate(), closestEnemy.getyCenterCoordinate()));
+            getPlayer().setShootingCooldown(getPlayer().basicShootingCooldown);
+        }
+    }
+
+    private Person findClosestEnemy() {
+        Person closestEnemy = null;
+        for (Person enemy : game.getCurrentLevel().enemies) {
+            if (closestEnemy == null) {
+                closestEnemy = enemy;
+            } else if(Coordinates.getDistance(getPlayer(), enemy) < Coordinates.getDistance(getPlayer(), closestEnemy)) {
+                closestEnemy = enemy;
+            }
+        }
+        return closestEnemy;
+    }
+
+    private void decrementAllCD(float delta){
         getPlayer().decrementBigAoeCd(delta);
         getPlayer().decrementCd(delta);
-        //getPlayer().shoot();
+        for(Person enemy : game.getCurrentLevel().enemies) {
+            enemy.decrementCd(delta);
+        }
+    }
 
+    private void moveAllProjectTiles(float delta){
+        for (Projectile p : game.getCurrentLevel().projectiles) {
+            p.move(delta);
+        }
+    }
+
+    private void hitEveryone(){
+        for (Projectile p : game.getCurrentLevel().projectiles) {
+            for(Person enemy : game.getCurrentLevel().enemies) {
+                if(Coordinates.getXDistance(p, enemy) < 5
+                        && Coordinates.getYDistance(p, enemy) < 5){
+                    enemy.getHit(p.getDamage());
+                }
+            }
+        }
     }
 }

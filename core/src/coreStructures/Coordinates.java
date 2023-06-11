@@ -26,4 +26,14 @@ public abstract class Coordinates {
     public void setyCenterCoordinate(float yCenterCoordinate) {
         this.yCenterCoordinate = yCenterCoordinate;
     }
+
+    public static float getXDistance(Coordinates a, Coordinates b){
+        return Math.abs(a.getxCenterCoordinate()-b.getxCenterCoordinate());
+    }
+    public static float getYDistance(Coordinates a, Coordinates b){
+        return Math.abs(a.getyCenterCoordinate()-b.getyCenterCoordinate());
+    }
+    public static float getDistance(Coordinates a, Coordinates b){
+        return (float) Math.sqrt(Math.pow(getXDistance(a,b),2)+Math.pow(getYDistance(a,b),2));
+    }
 }

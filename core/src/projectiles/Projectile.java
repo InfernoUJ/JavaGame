@@ -10,10 +10,22 @@ public abstract class Projectile extends Coordinates implements Movable {
     private int speed;
     private float destinationXCoordinate;
     private float destinationYCoordinate;
+    private float xCenterCoordinate;
+    private float yCenterCoordinate;
 
 
     public int getDamage() {
         return damage;
+    }
+    public float getxCenterCoordinate() {
+        return xCenterCoordinate;
+    }
+    public float getyCenterCoordinate() {
+        return yCenterCoordinate;
+    }
+    public void move(float delta){
+        xCenterCoordinate += delta * speed * (destinationXCoordinate-xCenterCoordinate);
+        yCenterCoordinate += delta * speed * (destinationYCoordinate-yCenterCoordinate);
     }
 
     public void setDamage(int damage) {
@@ -51,7 +63,7 @@ public abstract class Projectile extends Coordinates implements Movable {
     @Override
     public void setDirection(Pair<Float, Float> direction) {
         destinationXCoordinate = direction.getLeft();
-        destinationYCoordinate  =direction.getRight();
+        destinationYCoordinate  = direction.getRight();
     }
 
     @Override
