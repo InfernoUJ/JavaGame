@@ -1,6 +1,8 @@
 package view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -12,11 +14,15 @@ public class Bullet extends Actor {
     private float radius;
     private TextureRegion bulletTexture;
     private final Projectile myProjectile;
+    private boolean wasHit = false;
     public Bullet(float radius, Projectile myProjectile) {
         this.myProjectile = myProjectile;
         this.radius = radius;
         setBounds(myProjectile.getxCenterCoordinate() - radius, myProjectile.getyCenterCoordinate() - radius, 2 * radius, 2 * radius);
         bulletTexture = createBulletTexture(radius);
+    }
+    public void hit(){
+        wasHit = true;
     }
 
     @Override
@@ -28,7 +34,14 @@ public class Bullet extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         //System.out.println("Drawing bullet "+myProjectile.getxCenterCoordinate()+" "+myProjectile.getyCenterCoordinate());
         super.draw(batch, parentAlpha);
-        batch.draw(bulletTexture, myProjectile.getxCenterCoordinate(), myProjectile.getyCenterCoordinate());
+        if(!wasHit){
+            batch.draw(bulletTexture, myProjectile.getxCenterCoordinate(), myProjectile.getyCenterCoordinate());
+        }
+        if(wasHit){
+//            batch.flush();
+//            Gdx.gl.glClearColor(0, 0, 0, 0); // Transparent color
+//            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        }
     }
 
     private TextureRegion createBulletTexture(float radius) {
@@ -39,5 +52,13 @@ public class Bullet extends Actor {
         Texture texture = new Texture(pixmap);
         pixmap.dispose();
         return new TextureRegion(texture);
+    }
+
+    public void dispose() {
+        bulletTexture.getTexture().dispose();
+    }
+
+    public boolean hasProjectile(Projectile p) {
+        return p == myProjectile;
     }
 }

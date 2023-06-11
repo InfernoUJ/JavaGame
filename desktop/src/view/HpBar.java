@@ -29,11 +29,13 @@ public class HpBar extends Actor {
     }
 
     public void setCurrentValue(float currentValue) {
+        if(currentValue < 0){currentValue = 0;}
         currentWidth = maxWidth * currentValue;
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        System.out.println(currentWidth);
         batch.draw(foregroundTexture, getX(), getY(), currentWidth, height);
         batch.draw(backgroundTexture, getX() + currentWidth, getY(), maxWidth - currentWidth, height);
     }

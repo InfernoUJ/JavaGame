@@ -62,7 +62,7 @@ public class GameScreen extends ScreenAdapter {
     }
     public void addBullet(Projectile p){
         //System.out.println("Bullet added");
-        Bullet b = new Bullet(20, p);
+        Bullet b = new Bullet(7, p);
         bullets.add(b);
         currentStage.addActor(b);
     }
@@ -75,10 +75,10 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         super.render(delta);
+        Gdx.gl.glClearColor((float)74/256,  (float)55/256, (float)40/256, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // Set the background color
         // TODO: move it to textures and skin pack( or smth like that)
-        Gdx.gl.glClearColor(0,  1, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         //System.out.println("GameScreen render");
 
@@ -93,4 +93,19 @@ public class GameScreen extends ScreenAdapter {
         currentStage.getViewport().update(width, height, true);
     }
 
+    public void removeBullet(Projectile p) {
+        int idx = -1;
+        for(int i = 0; i < bullets.size(); i++){
+            if(bullets.get(i).hasProjectile(p)){
+                idx = i;
+                break;
+            }
+        }
+        if(idx > 0){
+            bullets.get(idx).hit();
+            bullets.get(idx).draw(currentStage.getBatch(), 0);
+            bullets.get(idx).remove();
+            bullets.remove(idx);
+        }
+    }
 }

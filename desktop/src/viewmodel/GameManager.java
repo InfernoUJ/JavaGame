@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import coreStructures.Coordinates;
-import jdk.jshell.PersistentSnippet;
 import mainGame.Game;
 import projectiles.Projectile;
 import view.Character;
@@ -83,7 +82,7 @@ public class GameManager {
     public List<Character> loadEnemies() {
         List<Character> enemies = new ArrayList<>();
         for(Person enemy : game.getCurrentLevel().enemies) {
-            Character character = new Character(this, enemy, new TextureRegion(new Texture("enemy1.png")));
+            Character character = new Character(this, enemy, new TextureRegion(new Texture("enemy2_2.png")));
             enemies.add(character);
         }
         return enemies;
@@ -144,6 +143,7 @@ public class GameManager {
             p.move(delta);
             if(isOutOfMap(p)){
                 toRemove.add(p);
+                gameScreen.removeBullet(p);
             }
         }
         game.getCurrentLevel().projectiles.removeAll(toRemove);
@@ -155,17 +155,27 @@ public class GameManager {
     }
 
     private void hitEveryone(){
+        List<Projectile> toRemove = new ArrayList<>();
         for (Projectile p : game.getCurrentLevel().projectiles) {
             if(Coordinates.getXDistance(p, getPlayer()) < 5
                     && Coordinates.getYDistance(p, getPlayer()) < 5){
                 p.hit(getPlayer());
+                gameScreen.removeBullet(p);
+                toRemove.add(p);
+                if(getPlayer().getHealthPoints() <= 0){
+                    // TODO: add game over screen
+                    // mainManager.setScreen(mainManager.gameOverScreen);
+                }
             }
             for(Person enemy : game.getCurrentLevel().enemies) {
                 if(Coordinates.getXDistance(p, enemy) < 5
                         && Coordinates.getYDistance(p, enemy) < 5){
                     p.hit(enemy);
+                    gameScreen.removeBullet(p);
+                    toRemove.add(p);
                 }
             }
         }
+        game.getCurrentLevel().projectiles.removeAll(toRemove);
     }
 }

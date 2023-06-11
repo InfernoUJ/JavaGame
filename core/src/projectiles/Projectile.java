@@ -9,6 +9,8 @@ public abstract class Projectile extends Coordinates implements Movable {
     private int damage;
     private int speed = 1000;
     private float destinationXCoordinate;
+    private float cos;
+    private float sin;
     private float destinationYCoordinate;
 
 
@@ -17,8 +19,6 @@ public abstract class Projectile extends Coordinates implements Movable {
     }
 
     public void move(float delta){
-        float cos = (destinationXCoordinate - getxCenterCoordinate())/Coordinates.getDistance(getxCenterCoordinate(),getyCenterCoordinate(),destinationXCoordinate,destinationYCoordinate);
-        float sin = (destinationYCoordinate - getyCenterCoordinate())/Coordinates.getDistance(getxCenterCoordinate(),getyCenterCoordinate(),destinationXCoordinate,destinationYCoordinate);
         setxCenterCoordinate(getxCenterCoordinate()+delta*speed*cos);
         setyCenterCoordinate(getyCenterCoordinate()+delta*speed*sin);
     }
@@ -59,6 +59,8 @@ public abstract class Projectile extends Coordinates implements Movable {
     public void setDirection(Pair<Float, Float> direction) {
         destinationXCoordinate = direction.getLeft();
         destinationYCoordinate  = direction.getRight();
+        cos = (destinationXCoordinate - getxCenterCoordinate())/Coordinates.getDistance(getxCenterCoordinate(),getyCenterCoordinate(),destinationXCoordinate,destinationYCoordinate);
+        sin = (destinationYCoordinate - getyCenterCoordinate())/Coordinates.getDistance(getxCenterCoordinate(),getyCenterCoordinate(),destinationXCoordinate,destinationYCoordinate);
     }
 
     @Override
