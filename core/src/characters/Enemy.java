@@ -3,6 +3,7 @@ package characters;
 import level.Level;
 import org.apache.commons.lang3.tuple.Pair;
 import projectiles.EnemyProjectile;
+import projectiles.Projectile;
 
 
 public class Enemy extends Person{
@@ -15,14 +16,16 @@ public class Enemy extends Person{
 
 
     @Override
-    public void shoot(Pair<Float,Float> direction) {
+    public Projectile shoot(Pair<Float,Float> direction) {
         if(level == null) {
             throw new IllegalStateException("enemy has no level");
         }
         if(getShootingCooldown()>0) {
-            return;
+            return null;
         }
-        level.projectiles.add(new EnemyProjectile(getxCenterCoordinate(),getyCenterCoordinate(),1,direction,1));
+        Projectile p = new EnemyProjectile(getxCenterCoordinate(),getyCenterCoordinate(),1,direction,5);
+        level.projectiles.add(p);
+        return p;
     }
 
 

@@ -7,25 +7,20 @@ import coreStructures.Movable;
 
 public abstract class Projectile extends Coordinates implements Movable {
     private int damage;
-    private int speed;
+    private int speed = 1000;
     private float destinationXCoordinate;
     private float destinationYCoordinate;
-    private float xCenterCoordinate;
-    private float yCenterCoordinate;
 
 
     public int getDamage() {
         return damage;
     }
-    public float getxCenterCoordinate() {
-        return xCenterCoordinate;
-    }
-    public float getyCenterCoordinate() {
-        return yCenterCoordinate;
-    }
+
     public void move(float delta){
-        xCenterCoordinate += delta * speed * (destinationXCoordinate-xCenterCoordinate);
-        yCenterCoordinate += delta * speed * (destinationYCoordinate-yCenterCoordinate);
+        float cos = (destinationXCoordinate - getxCenterCoordinate())/Coordinates.getDistance(getxCenterCoordinate(),getyCenterCoordinate(),destinationXCoordinate,destinationYCoordinate);
+        float sin = (destinationYCoordinate - getyCenterCoordinate())/Coordinates.getDistance(getxCenterCoordinate(),getyCenterCoordinate(),destinationXCoordinate,destinationYCoordinate);
+        setxCenterCoordinate(getxCenterCoordinate()+delta*speed*cos);
+        setyCenterCoordinate(getyCenterCoordinate()+delta*speed*sin);
     }
 
     public void setDamage(int damage) {
@@ -46,7 +41,7 @@ public abstract class Projectile extends Coordinates implements Movable {
         setSpeed(speed);
         setDamage(damage);
     }
-    abstract void hit(Person a);
+    public abstract void hit(Person a);
 
     @Override
     public void setSpeed(int speed) {

@@ -26,7 +26,7 @@ public class GameManager {
     private final Game game;
     public final int maxHealthPoints = 100;
     private final Manager mainManager;
-    private final Screen gameScreen;
+    private final GameScreen gameScreen;
     private final InputProcessor controller;
     GameManager(Manager mainManager){
         game = new Game();
@@ -102,14 +102,18 @@ public class GameManager {
             if (closestEnemy == null){
                 throw new RuntimeException("No enemies found");
             }
-            getPlayer().shoot(org.apache.commons.lang3.tuple.Pair.of(closestEnemy.getxCenterCoordinate(), closestEnemy.getyCenterCoordinate()));
-            getPlayer().setShootingCooldown(getPlayer().basicShootingCooldown);
+            Projectile p = getPlayer().shoot(Pair.of(closestEnemy.getxCenterCoordinate(), closestEnemy.getyCenterCoordinate()));
+            System.out.println("Shooting from " + p.getxCenterCoordinate() +" "+ p.getyCenterCoordinate());
+            System.out.println("Shooting to " + p.getDirection().getLeft() +" "+ p.getDirection().getRight());
+            getPlayer().resetCd();
+            gameScreen.addBullet(p);
         }
 
         for(Person enemy : game.getCurrentLevel().enemies) {
             if(enemy.getShootingCooldown() <= 0){
-                enemy.shoot(Pair.of(getHeroXCoordinate(), getHeroYCoordinate()));
-                enemy.setShootingCooldown(enemy.basicShootingCooldown);
+                Projectile p = enemy.shoot(Pair.of(getHeroXCoordinate(), getHeroYCoordinate()));
+                enemy.resetCd();
+                gameScreen.addBullet(p);
             }
         }
     }
@@ -152,10 +156,14 @@ public class GameManager {
 
     private void hitEveryone(){
         for (Projectile p : game.getCurrentLevel().projectiles) {
+            if(Coordinates.getXDistance(p, getPlayer()) < 5
+                    && Coordinates.getYDistance(p, getPlayer()) < 5){
+                p.hit(getPlayer());
+            }
             for(Person enemy : game.getCurrentLevel().enemies) {
                 if(Coordinates.getXDistance(p, enemy) < 5
                         && Coordinates.getYDistance(p, enemy) < 5){
-                    enemy.getHit(p.getDamage());
+                    p.hit(enemy);
                 }
             }
         }

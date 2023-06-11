@@ -15,7 +15,7 @@ public class Bullet extends Actor {
     public Bullet(float radius, Projectile myProjectile) {
         this.myProjectile = myProjectile;
         this.radius = radius;
-        //setBounds(x - radius, y - radius, 2 * radius, 2 * radius);
+        setBounds(myProjectile.getxCenterCoordinate() - radius, myProjectile.getyCenterCoordinate() - radius, 2 * radius, 2 * radius);
         bulletTexture = createBulletTexture(radius);
     }
 
@@ -26,6 +26,7 @@ public class Bullet extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        //System.out.println("Drawing bullet "+myProjectile.getxCenterCoordinate()+" "+myProjectile.getyCenterCoordinate());
         super.draw(batch, parentAlpha);
         batch.draw(bulletTexture, myProjectile.getxCenterCoordinate(), myProjectile.getyCenterCoordinate());
     }

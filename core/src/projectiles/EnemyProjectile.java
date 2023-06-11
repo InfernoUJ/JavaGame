@@ -14,7 +14,7 @@ public class EnemyProjectile extends Projectile {
     }
 
     @Override
-    void hit(Person a) {
+    public void hit(Person a) {
         if(a instanceof Enemy) {
             return;
         }

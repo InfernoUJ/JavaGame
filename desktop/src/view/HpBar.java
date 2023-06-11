@@ -14,6 +14,7 @@ public class HpBar extends Actor {
     private Color backgroundColor;
     private Color foregroundColor;
     private TextureRegion foregroundTexture;
+    private TextureRegion backgroundTexture;
 
     public HpBar(float maxWidth, float height, Color backgroundColor, Color foregroundColor) {
         this.maxWidth = maxWidth;
@@ -24,6 +25,7 @@ public class HpBar extends Actor {
         setWidth(maxWidth);
         setHeight(height);
         foregroundTexture = createForegroundTextureRegion();
+        backgroundTexture = createBackgroundTextureRegion();
     }
 
     public void setCurrentValue(float currentValue) {
@@ -33,6 +35,7 @@ public class HpBar extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(foregroundTexture, getX(), getY(), currentWidth, height);
+        batch.draw(backgroundTexture, getX() + currentWidth, getY(), maxWidth - currentWidth, height);
     }
 
     @Override
@@ -43,6 +46,15 @@ public class HpBar extends Actor {
     private TextureRegion createForegroundTextureRegion() {
         Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pixmap.setColor(foregroundColor);
+        pixmap.fill();
+        Texture texture = new Texture(pixmap);
+        pixmap.dispose();
+        return new TextureRegion(texture);
+    }
+
+    private TextureRegion createBackgroundTextureRegion() {
+        Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pixmap.setColor(backgroundColor);
         pixmap.fill();
         Texture texture = new Texture(pixmap);
         pixmap.dispose();

@@ -25,14 +25,14 @@ public class Character extends Actor {
         batch.draw(texture, myhero.getxCenterCoordinate(), myhero.getyCenterCoordinate());
         hpBar.setCurrentValue((float)myhero.getHealthPoints() / (float)gameManager.maxHealthPoints);
 
-            if(myhero instanceof characters.Enemy){
-                System.out.print("Enemy hp: ");
-            }
-            else {
-                System.out.print("Hero hp: ");
-            }
-            System.out.println(hpBar.getX()+" "+hpBar.getY());
-            System.out.println(myhero.getHealthPoints());
+//            if(myhero instanceof characters.Enemy){
+//                System.out.print("Enemy hp: ");
+//            }
+//            else {
+//                System.out.print("Hero hp: ");
+//            }
+//            System.out.println(hpBar.getX()+" "+hpBar.getY());
+//            System.out.println(myhero.getHealthPoints());
 
         hpBar.draw(batch, parentAlpha);
     }

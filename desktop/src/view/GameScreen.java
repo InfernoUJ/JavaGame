@@ -12,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import projectiles.Projectile;
 import viewmodel.GameManager;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class GameScreen extends ScreenAdapter {
     private OrthogonalTiledMapRenderer mapRenderer;
     private Character hero;
     private List<Character> enemies = new ArrayList<>();
+    private List<Bullet> bullets = new ArrayList<>();
     public GameScreen(GameManager gameManager) {
         super();
         this.gameManager = gameManager;
@@ -58,6 +60,12 @@ public class GameScreen extends ScreenAdapter {
         loadEnemies();
 
     }
+    public void addBullet(Projectile p){
+        //System.out.println("Bullet added");
+        Bullet b = new Bullet(20, p);
+        bullets.add(b);
+        currentStage.addActor(b);
+    }
     private void loadEnemies(){
         enemies = gameManager.loadEnemies();
         for (Character enemy : enemies) {
@@ -67,7 +75,6 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         super.render(delta);
-        System.out.println(delta);
         // Set the background color
         // TODO: move it to textures and skin pack( or smth like that)
         Gdx.gl.glClearColor(0,  1, 0, 1);

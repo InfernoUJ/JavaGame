@@ -3,6 +3,7 @@ package characters;
 import org.apache.commons.lang3.tuple.Pair;
 import projectiles.BigAoeAttack;
 import projectiles.PlayerProjectile;
+import projectiles.Projectile;
 
 public class Player extends Person{
 
@@ -31,6 +32,9 @@ public class Player extends Person{
     public void decrementBigAoeCd(float delta) {
         bigAoeCooldown-=delta;
     }
+    public void resetBigAoeCd() {
+        bigAoeCooldown = basicBigAoeCooldown;
+    }
 
     public void shootBigAoeAttack(float xCoordinate, float yCoordinate, int radius) {
         if(level == null) {
@@ -42,14 +46,16 @@ public class Player extends Person{
         level.projectiles.add(new BigAoeAttack(xCoordinate,yCoordinate,radius,1));
     }
     @Override
-    public void shoot(Pair<Float,Float> direction) {
+    public Projectile shoot(Pair<Float,Float> direction) {
         if(level == null) {
             throw new IllegalStateException("player has no level");
         }
         if(getShootingCooldown()>0) {
-            return;
+            return null;
         }
-        level.projectiles.add(new PlayerProjectile(getxCenterCoordinate(),getyCenterCoordinate(),1,direction,1));
+        Projectile p = new PlayerProjectile(getxCenterCoordinate(),getyCenterCoordinate(),1,direction,5);
+        level.projectiles.add(p);
+        return p;
     }
 
 

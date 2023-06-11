@@ -38,7 +38,9 @@ public  abstract class Person extends Coordinates implements Movable {
     public void decrementCd(float delta) {
         shootingCooldown-=delta;
     }
-
+    public void resetCd() {
+        shootingCooldown = basicShootingCooldown;
+    }
     public int getHealthPoints() {
         return healthPoints;
     }
@@ -52,7 +54,7 @@ public  abstract class Person extends Coordinates implements Movable {
             stopMoving();
         }
     }
-    public abstract void shoot(Pair<Float,Float> direction);
+    public abstract Projectile shoot(Pair<Float,Float> direction);
     @Override
     public void setSpeed(int speed) {
         this.speed = speed;

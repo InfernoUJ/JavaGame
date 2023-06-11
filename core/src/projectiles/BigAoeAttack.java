@@ -15,7 +15,7 @@ public class BigAoeAttack extends Projectile {
     }
 
     @Override
-    void hit(Person a) {
+    public void hit(Person a) {
         if(a == null) {
             throw new NullPointerException("projectile hit a null");
         }
