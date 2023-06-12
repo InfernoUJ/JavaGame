@@ -53,7 +53,7 @@ public class Player extends Person{
         if(getShootingCooldown()>0) {
             return null;
         }
-        Projectile p = new PlayerProjectile(getxCenterCoordinate(),getyCenterCoordinate(),1,direction,5);
+        Projectile p = new PlayerProjectile(getxCenterCoordinate(),getyCenterCoordinate(),1,direction,101);
         level.projectiles.add(p);
         return p;
     }

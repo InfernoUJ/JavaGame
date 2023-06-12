@@ -93,13 +93,21 @@ public class GameManager {
         shootAllProjectiles();
         moveAllProjectTiles(delta);
         hitEveryone();
+        checkIfEnemiesAreDead();
+    }
+
+    private void checkIfEnemiesAreDead() {
+        if(game.getCurrentLevel().enemies.isEmpty()) {
+            mainManager.victoryScreen();
+        }
     }
 
     private void shootAllProjectiles() {
         if(getPlayer().getShootingCooldown() <= 0){
             Person closestEnemy = findClosestEnemy();
             if (closestEnemy == null){
-                throw new RuntimeException("No enemies found");
+                //throw new RuntimeException("No enemies found");
+                return;
             }
             Projectile p = getPlayer().shoot(Pair.of(closestEnemy.getxCenterCoordinate(), closestEnemy.getyCenterCoordinate()));
             System.out.println("Shooting from " + p.getxCenterCoordinate() +" "+ p.getyCenterCoordinate());
@@ -155,13 +163,14 @@ public class GameManager {
     }
 
     private void hitEveryone(){
-        List<Projectile> toRemove = new ArrayList<>();
+        List<Projectile> projectilesToRemove = new ArrayList<>();
+        List<Person> enemiesToRemove = new ArrayList<>();
         for (Projectile p : game.getCurrentLevel().projectiles) {
             if(Coordinates.getXDistance(p, getPlayer()) < 5
                     && Coordinates.getYDistance(p, getPlayer()) < 5){
                 p.hit(getPlayer());
                 gameScreen.removeBullet(p);
-                toRemove.add(p);
+                projectilesToRemove.add(p);
                 if(getPlayer().getHealthPoints() <= 0){
                     // TODO: add game over screen
                     // mainManager.setScreen(mainManager.gameOverScreen);
@@ -171,11 +180,16 @@ public class GameManager {
                 if(Coordinates.getXDistance(p, enemy) < 5
                         && Coordinates.getYDistance(p, enemy) < 5){
                     p.hit(enemy);
+                    if(enemy.getHealthPoints() <= 0){
+                        enemiesToRemove.add(enemy);
+                        gameScreen.removeEnemy(enemy);
+                    }
                     gameScreen.removeBullet(p);
-                    toRemove.add(p);
+                    projectilesToRemove.add(p);
                 }
             }
         }
-        game.getCurrentLevel().projectiles.removeAll(toRemove);
+        game.getCurrentLevel().projectiles.removeAll(projectilesToRemove);
+        game.getCurrentLevel().enemies.removeAll(enemiesToRemove);
     }
 }

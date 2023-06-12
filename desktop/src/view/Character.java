@@ -7,10 +7,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import viewmodel.GameManager;
 
 public class Character extends Actor {
-    private final Person myhero;
+    public final Person myhero;
     public final HpBar hpBar;
     private final TextureRegion texture;
     private final GameManager gameManager;
+    private boolean killed = false;
 
     public Character(GameManager gameManager, Person myhero, TextureRegion texture) {
         super();
@@ -22,10 +23,12 @@ public class Character extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(texture, myhero.getxCenterCoordinate(), myhero.getyCenterCoordinate());
-        hpBar.setCurrentValue((float)myhero.getHealthPoints() / (float)gameManager.maxHealthPoints);
+        if(!killed) {
+            batch.draw(texture, myhero.getxCenterCoordinate(), myhero.getyCenterCoordinate());
+            hpBar.setCurrentValue((float) myhero.getHealthPoints() / (float) gameManager.maxHealthPoints);
 
-        hpBar.draw(batch, parentAlpha);
+            hpBar.draw(batch, parentAlpha);
+        }
     }
 
     @Override
@@ -36,5 +39,9 @@ public class Character extends Actor {
         hpBar.setX(getX());
         hpBar.setY(getY() + texture.getTexture().getHeight() + 10); // Position the hpBar below the character
         hpBar.act(delta);
+    }
+
+    public void kill() {
+        killed = true;
     }
 }

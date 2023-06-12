@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import coreStructures.OurGame;
 import view.StartMenuScreen;
+import view.VictoryScreen;
 
 public class Manager {
     final OurGame game;
@@ -46,5 +47,11 @@ public class Manager {
 
     public void dispose() {
         // @TODO
+    }
+
+    public void nextLevel() {
+    }
+    public void victoryScreen(){
+        currentScreen = new VictoryScreen(this);
     }
 }

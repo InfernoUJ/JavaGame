@@ -1,5 +1,6 @@
 package view;
 
+import characters.Person;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
@@ -106,6 +107,22 @@ public class GameScreen extends ScreenAdapter {
             bullets.get(idx).draw(currentStage.getBatch(), 0);
             bullets.get(idx).remove();
             bullets.remove(idx);
+        }
+    }
+
+    public void removeEnemy(Person enemy) {
+        int idx = -1;
+        for(int i = 0; i < enemies.size(); i++){
+            if(enemies.get(i).myhero == enemy){
+                idx = i;
+                break;
+            }
+        }
+        if(idx > 0){
+            enemies.get(idx).kill();
+            enemies.get(idx).draw(currentStage.getBatch(), 0);
+            enemies.get(idx).remove();
+            enemies.remove(idx);
         }
     }
 }
