@@ -53,7 +53,7 @@ public class Board extends Coordinates {
 
     @Override
     public int getLength() {
-        return 7*BlockOfTiles.length;
+        return 7 * BlockOfTiles.length;
     }
 
     public void activateAllTraps() {

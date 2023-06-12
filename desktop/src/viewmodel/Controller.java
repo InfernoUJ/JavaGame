@@ -44,4 +44,11 @@ public class Controller extends InputAdapter {
         return true;
     }
 
+    public void stopAllMovers(){
+        for(Mover m : mover.values()){
+            m.stopWork();
+        }
+        mover.clear();
+    }
+
 }

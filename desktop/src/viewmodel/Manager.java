@@ -12,6 +12,7 @@ import view.VictoryScreen;
 public class Manager {
     final OurGame game;
     public Screen currentScreen = null;
+    public Screen vicrotyScreen = null;
     public Viewport viewport;
     public Skin skin;
     private Screen startMenuScreen;
@@ -50,8 +51,12 @@ public class Manager {
     }
 
     public void nextLevel() {
+        vicrotyScreen.dispose();
+        gameManager.nextLevel();
+        currentScreen = gameManager.getGameScreen();
     }
-    public void victoryScreen(){
-        currentScreen = new VictoryScreen(this);
+    public void loadVictoryScreen(){
+        vicrotyScreen = new VictoryScreen(this);
+        currentScreen = vicrotyScreen;
     }
 }

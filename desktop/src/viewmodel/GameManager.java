@@ -18,25 +18,29 @@ import view.GameScreen;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 
 public class GameManager {
-    private final Game game;
+    public final Game game;
     public final int maxHealthPoints = 100;
     private final Manager mainManager;
-    private final GameScreen gameScreen;
-    private final InputProcessor controller;
+    private GameScreen gameScreen;
+    private Controller controller;
     GameManager(Manager mainManager){
         game = new Game();
         game.startGame();
 
+        this.mainManager = mainManager;
+        loadGameScreen();
+        //System.out.println(numberOfEnemies());
+    }
+    private void loadGameScreen(){
         controller = new Controller(this);
         Gdx.input.setInputProcessor(controller);
-
-        this.mainManager = mainManager;
         gameScreen = new GameScreen(this);
-        System.out.println(numberOfEnemies());
     }
     public Player getPlayer() {
         return game.getCurrentLevel().player;
@@ -50,7 +54,7 @@ public class GameManager {
     }
 
     public void processKeyDown(int keyCode) {
-        //System.out.println("Updated " + getHeroXCoordinate() +" "+ getHeroYCoordinate());
+        System.out.println("Updated " + getHeroXCoordinate() +" "+ getHeroYCoordinate());
         if(keyCode == Input.Keys.W) {
             game.getCurrentLevel().player.setyCenterCoordinate(getHeroYCoordinate() + getPlayer().getSpeed());
         }
@@ -63,6 +67,7 @@ public class GameManager {
         if(keyCode == Input.Keys.A) {
             game.getCurrentLevel().player.setxCenterCoordinate(getHeroXCoordinate() - getPlayer().getSpeed());
         }
+        //moveEnemies();
     }
 
     public Screen getGameScreen(){
@@ -81,8 +86,10 @@ public class GameManager {
 
     public List<Character> loadEnemies() {
         List<Character> enemies = new ArrayList<>();
+        Random r = new Random();
+        String[] enemyTexture = {"enemy2_2.png", "enemy2.png", "enemy3.png"};
         for(Person enemy : game.getCurrentLevel().enemies) {
-            Character character = new Character(this, enemy, new TextureRegion(new Texture("enemy2_2.png")));
+        Character character = new Character(this, enemy, new TextureRegion(new Texture(enemyTexture[r.nextInt(enemyTexture.length)])));
             enemies.add(character);
         }
         return enemies;
@@ -98,7 +105,7 @@ public class GameManager {
 
     private void checkIfEnemiesAreDead() {
         if(game.getCurrentLevel().enemies.isEmpty()) {
-            mainManager.victoryScreen();
+            endLevel();
         }
     }
 
@@ -107,6 +114,7 @@ public class GameManager {
             Person closestEnemy = findClosestEnemy();
             if (closestEnemy == null){
                 //throw new RuntimeException("No enemies found");
+                endLevel();
                 return;
             }
             Projectile p = getPlayer().shoot(Pair.of(closestEnemy.getxCenterCoordinate(), closestEnemy.getyCenterCoordinate()));
@@ -191,5 +199,23 @@ public class GameManager {
         }
         game.getCurrentLevel().projectiles.removeAll(projectilesToRemove);
         game.getCurrentLevel().enemies.removeAll(enemiesToRemove);
+    }
+
+    public void nextLevel() {
+        game.advanceToTheNextLevel();
+        loadGameScreen();
+    }
+
+    public void moveEnemies(){
+        for(Enemy enemy : game.getCurrentLevel().enemies) {
+            enemy.moveToPlayer(getPlayer());
+        }
+    }
+    private void endLevel(){
+        clean();
+        mainManager.loadVictoryScreen();
+    }
+    private void clean(){
+        controller.stopAllMovers();
     }
 }

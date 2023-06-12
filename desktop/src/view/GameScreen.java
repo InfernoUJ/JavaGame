@@ -61,6 +61,12 @@ public class GameScreen extends ScreenAdapter {
         loadEnemies();
 
     }
+
+//    public void loadSpecialTiles(){
+//        for(int i = 1; i < gameManager.game.getCurrentLevel().board.blocks.size()-1; i++){
+//
+//        }
+//    }
     public void addBullet(Projectile p){
         //System.out.println("Bullet added");
         Bullet b = new Bullet(7, p);
@@ -85,6 +91,7 @@ public class GameScreen extends ScreenAdapter {
 
 
         currentStage.act(delta);
+        gameManager.moveEnemies();
         currentStage.draw();
         gameManager.makeShooting(delta);
     }
