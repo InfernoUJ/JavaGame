@@ -11,8 +11,9 @@ public  abstract class Person extends Coordinates implements Movable {
     int speed = 0;
     private Pair<Float,Float> direction = Pair.of(0f,0f);
     public Level level;
-    private float shootingCooldown = 1;
+    private float shootingCooldown = 2;
     public final float basicShootingCooldown = 1;
+    public final int maxHealthPoints = 100;
     int healthPoints = 100;
 
     @Override

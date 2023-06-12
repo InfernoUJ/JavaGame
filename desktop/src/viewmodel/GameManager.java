@@ -23,7 +23,6 @@ import java.util.Random;
 
 public class GameManager {
     public final Game game;
-    public final int maxHealthPoints = 100;
     private final Manager mainManager;
     private GameScreen gameScreen;
     private Controller controller;
@@ -171,8 +170,8 @@ public class GameManager {
         List<Projectile> projectilesToRemove = new ArrayList<>();
         List<Person> enemiesToRemove = new ArrayList<>();
         for (Projectile p : game.getCurrentLevel().projectiles) {
-            if(Coordinates.getXDistance(p, getPlayer()) < 5
-                    && Coordinates.getYDistance(p, getPlayer()) < 5){
+            if(Coordinates.getXDistance(p, getPlayer()) < 10
+                    && Coordinates.getYDistance(p, getPlayer()) < 10){
                 p.hit(getPlayer());
                 gameScreen.removeBullet(p);
                 projectilesToRemove.add(p);
@@ -181,8 +180,8 @@ public class GameManager {
                 }
             }
             for(Person enemy : game.getCurrentLevel().enemies) {
-                if(Coordinates.getXDistance(p, enemy) < 5
-                        && Coordinates.getYDistance(p, enemy) < 5){
+                if(Coordinates.getXDistance(p, enemy) < 10
+                        && Coordinates.getYDistance(p, enemy) < 10){
                     p.hit(enemy);
                     if(enemy.getHealthPoints() <= 0){
                         enemiesToRemove.add(enemy);

@@ -25,7 +25,7 @@ public class Character extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         if(!killed) {
             batch.draw(texture, myhero.getxCenterCoordinate(), myhero.getyCenterCoordinate());
-            hpBar.setCurrentValue((float) myhero.getHealthPoints() / (float) gameManager.maxHealthPoints);
+            hpBar.setCurrentValue((float) myhero.getHealthPoints() / (float) myhero.maxHealthPoints);
 
             hpBar.draw(batch, parentAlpha);
         }
