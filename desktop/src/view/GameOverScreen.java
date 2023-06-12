@@ -8,13 +8,13 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import viewmodel.GameManager;
 import viewmodel.Manager;
 
-public class VictoryScreen extends ScreenAdapter {
-    private final Manager mainManager;
-    private Stage stage;
-
-    public VictoryScreen(Manager mainManager) {
+public class GameOverScreen extends ScreenAdapter {
+    Manager mainManager;
+    Stage stage;
+    public GameOverScreen(Manager mainManager){
         super();
         this.mainManager = mainManager;
         loadElements();
@@ -22,13 +22,13 @@ public class VictoryScreen extends ScreenAdapter {
 
     private void loadElements(){
         stage = new Stage(mainManager.viewport);
-        TextButton ResumeGameButton = new TextButton("Next Level", mainManager.skin);
+        TextButton mainMenuButton = new TextButton("Back to main menu", mainManager.skin);
         // funny, but it doesn't work
-        ResumeGameButton.setSize(100, 500);
-        ResumeGameButton.addListener(new ChangeListener() {
+        mainMenuButton.setSize(100, 500);
+        mainMenuButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                mainManager.nextLevel();
+                mainManager.loadStartMenu();
             }
         });
 
@@ -50,15 +50,14 @@ public class VictoryScreen extends ScreenAdapter {
 
         table.defaults().space(Math.round(Gdx.graphics.getHeight() * 1f/1080 * 200));
         table.defaults().size(200, 50);
-        table.add(ResumeGameButton);
-        table.row();
+        table.add(mainMenuButton);
+        table.row();;
         table.add(ExitButton);
 
         // table.background(mainManager.backScreen);
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
     }
-
     @Override
     public void render(float delta){
         super.render(delta);
@@ -70,5 +69,11 @@ public class VictoryScreen extends ScreenAdapter {
 
         stage.act(delta);
         stage.draw();
+    }
+
+    @Override
+    public void dispose(){
+        super.dispose();
+        stage.dispose();
     }
 }

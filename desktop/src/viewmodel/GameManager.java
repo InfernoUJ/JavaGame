@@ -5,7 +5,6 @@ import characters.Person;
 import characters.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,7 +17,6 @@ import view.GameScreen;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -67,7 +65,6 @@ public class GameManager {
         if(keyCode == Input.Keys.A) {
             game.getCurrentLevel().player.setxCenterCoordinate(getHeroXCoordinate() - getPlayer().getSpeed());
         }
-        //moveEnemies();
     }
 
     public Screen getGameScreen(){
@@ -180,8 +177,7 @@ public class GameManager {
                 gameScreen.removeBullet(p);
                 projectilesToRemove.add(p);
                 if(getPlayer().getHealthPoints() <= 0){
-                    // TODO: add game over screen
-                    // mainManager.setScreen(mainManager.gameOverScreen);
+                    gameLost();
                 }
             }
             for(Person enemy : game.getCurrentLevel().enemies) {
@@ -214,6 +210,10 @@ public class GameManager {
     private void endLevel(){
         clean();
         mainManager.loadVictoryScreen();
+    }
+    private void gameLost(){
+        clean();
+        mainManager.loadGameOverMenu();
     }
     private void clean(){
         controller.stopAllMovers();

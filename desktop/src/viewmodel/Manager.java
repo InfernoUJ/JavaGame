@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import coreStructures.OurGame;
+import view.GameOverScreen;
 import view.StartMenuScreen;
 import view.VictoryScreen;
 
@@ -16,7 +17,7 @@ public class Manager {
     public Viewport viewport;
     public Skin skin;
     private Screen startMenuScreen;
-    private Screen gameScreen;
+    private Screen gameOverScreen;
     private GameManager gameManager;
 
     public Manager(final OurGame game) {
@@ -31,7 +32,7 @@ public class Manager {
 
 
     }
-    private void loadStartMenu(){
+    public void loadStartMenu(){
         startMenuScreen = new StartMenuScreen(this);
         //startMenuScreen.show();
         currentScreen = startMenuScreen;
@@ -58,5 +59,10 @@ public class Manager {
     public void loadVictoryScreen(){
         vicrotyScreen = new VictoryScreen(this);
         currentScreen = vicrotyScreen;
+    }
+
+    public void loadGameOverMenu() {
+        gameOverScreen = new GameOverScreen(this);
+        currentScreen = gameOverScreen;
     }
 }
