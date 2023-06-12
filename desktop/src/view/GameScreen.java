@@ -18,6 +18,7 @@ import viewmodel.GameManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GameScreen extends ScreenAdapter {
     private GameManager gameManager;
@@ -29,14 +30,15 @@ public class GameScreen extends ScreenAdapter {
     private Character hero;
     private List<Character> enemies = new ArrayList<>();
     private List<Bullet> bullets = new ArrayList<>();
+    private final Random random = new Random();
     public GameScreen(GameManager gameManager) {
         super();
         this.gameManager = gameManager;
-        loadScene();
+        //loadScene();
     }
 
 
-    private void loadScene(){
+    public void loadScene(){
         currentStage = new Stage(gameManager.getViewport());
 
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -55,30 +57,29 @@ public class GameScreen extends ScreenAdapter {
             }
         });
 
-        hero = new Character(gameManager, gameManager.getPlayer(), new TextureRegion(new Texture("hero2.png")));
+        hero = new Character(gameManager.getPlayer(), new TextureRegion(new Texture("hero2.png")));
         currentStage.addActor(hero);
-
-        loadEnemies();
-
     }
 
-//    public void loadSpecialTiles(){
-//        for(int i = 1; i < gameManager.game.getCurrentLevel().board.blocks.size()-1; i++){
-//
-//        }
-//    }
+    public void addEnemy(Person enemy){
+        Random r = new Random();
+        String[] enemyTexture = {"enemy2_2.png", "enemy2.png", "enemy3.png"};
+        Character character = new Character( enemy, new TextureRegion(new Texture(enemyTexture[r.nextInt(enemyTexture.length)])));
+        enemies.add(character);
+    }
+
     public void addBullet(Projectile p){
-        //System.out.println("Bullet added");
         Bullet b = new Bullet(7, p);
         bullets.add(b);
         currentStage.addActor(b);
     }
-    private void loadEnemies(){
-        enemies = gameManager.loadEnemies();
+
+    public void loadEnemies(){
         for (Character enemy : enemies) {
             currentStage.addActor(enemy);
         }
     }
+
     @Override
     public void render(float delta) {
         super.render(delta);
@@ -86,9 +87,6 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // Set the background color
         // TODO: move it to textures and skin pack( or smth like that)
-
-        //System.out.println("GameScreen render");
-
 
         currentStage.act(delta);
         gameManager.moveEnemies();

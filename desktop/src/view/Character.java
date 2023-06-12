@@ -10,12 +10,10 @@ public class Character extends Actor {
     public final Person myhero;
     public final HpBar hpBar;
     private final TextureRegion texture;
-    private final GameManager gameManager;
     private boolean killed = false;
 
-    public Character(GameManager gameManager, Person myhero, TextureRegion texture) {
+    public Character(Person myhero, TextureRegion texture) {
         super();
-        this.gameManager = gameManager;
         this.myhero = myhero;
         this.texture = texture;
         this.hpBar = new HpBar(100, 10, com.badlogic.gdx.graphics.Color.BLACK, com.badlogic.gdx.graphics.Color.GREEN);

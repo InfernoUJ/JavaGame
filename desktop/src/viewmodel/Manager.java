@@ -44,7 +44,7 @@ public class Manager {
     public void startGame(){
         startMenuScreen.dispose();
         gameManager = new GameManager(this);
-        currentScreen = gameManager.getGameScreen();
+        currentScreen = gameManager.gameScreen;
     }
 
     public void dispose() {
@@ -54,7 +54,7 @@ public class Manager {
     public void nextLevel() {
         vicrotyScreen.dispose();
         gameManager.nextLevel();
-        currentScreen = gameManager.getGameScreen();
+        currentScreen = gameManager.gameScreen;
     }
     public void loadVictoryScreen(){
         vicrotyScreen = new VictoryScreen(this);

@@ -5,49 +5,48 @@ import characters.Person;
 import characters.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import coreStructures.Coordinates;
 import mainGame.Game;
 import projectiles.Projectile;
-import view.Character;
 import view.GameScreen;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 public class GameManager {
     public final Game game;
     private final Manager mainManager;
-    private GameScreen gameScreen;
+    public final GameScreen gameScreen = new GameScreen(this);
     private Controller controller;
+
     GameManager(Manager mainManager){
         game = new Game();
         game.startGame();
 
         this.mainManager = mainManager;
         loadGameScreen();
-        //System.out.println(numberOfEnemies());
     }
-    private void loadGameScreen(){
-        controller = new Controller(this);
-        Gdx.input.setInputProcessor(controller);
-        gameScreen = new GameScreen(this);
-    }
+
     public Player getPlayer() {
         return game.getCurrentLevel().player;
     }
+
     public int numberOfEnemies() {
         return game.getCurrentLevel().enemies.size();
     }
 
     public Viewport getViewport(){
         return mainManager.viewport;
+    }
+
+    private void loadGameScreen(){
+        controller = new Controller(this);
+        Gdx.input.setInputProcessor(controller);
+        gameScreen.loadScene();
+        addEnemies();
     }
 
     public void processKeyDown(int keyCode) {
@@ -66,12 +65,6 @@ public class GameManager {
         }
     }
 
-    public Screen getGameScreen(){
-        // is there rvalue in Java?
-        // otherwise this method is meaningless
-        return gameScreen;
-    }
-
     public float getHeroXCoordinate(){
         return game.getCurrentLevel().player.getxCenterCoordinate();
     }
@@ -80,15 +73,11 @@ public class GameManager {
         return game.getCurrentLevel().player.getyCenterCoordinate();
     }
 
-    public List<Character> loadEnemies() {
-        List<Character> enemies = new ArrayList<>();
-        Random r = new Random();
-        String[] enemyTexture = {"enemy2_2.png", "enemy2.png", "enemy3.png"};
+    public void addEnemies() {
         for(Person enemy : game.getCurrentLevel().enemies) {
-        Character character = new Character(this, enemy, new TextureRegion(new Texture(enemyTexture[r.nextInt(enemyTexture.length)])));
-            enemies.add(character);
+            gameScreen.addEnemy(enemy);
         }
-        return enemies;
+        gameScreen.loadEnemies();
     }
 
     public void makeShooting(float delta){
