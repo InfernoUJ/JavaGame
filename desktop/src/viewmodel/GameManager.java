@@ -34,10 +34,6 @@ public class GameManager {
         return game.getCurrentLevel().player;
     }
 
-    public int numberOfEnemies() {
-        return game.getCurrentLevel().enemies.size();
-    }
-
     public Viewport getViewport(){
         return mainManager.viewport;
     }

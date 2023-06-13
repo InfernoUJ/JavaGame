@@ -3,11 +3,13 @@ package view;
 import characters.Person;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import viewmodel.GameManager;
 
-public class Character extends Actor {
+public class Character extends Actor implements Bounded {
     public final Person myhero;
+    private Rectangle bound;
     public final HpBar hpBar;
     private final TextureRegion texture;
     private boolean killed = false;
@@ -17,6 +19,7 @@ public class Character extends Actor {
         this.myhero = myhero;
         this.texture = texture;
         this.hpBar = new HpBar(100, 10, com.badlogic.gdx.graphics.Color.BLACK, com.badlogic.gdx.graphics.Color.GREEN);
+        setBound();
     }
 
     @Override
@@ -41,5 +44,13 @@ public class Character extends Actor {
 
     public void kill() {
         killed = true;
+    }
+
+    public Rectangle getBound() {
+        return bound;
+    }
+
+    private void setBound() {
+        bound = new Rectangle(myhero.getxCenterCoordinate(), myhero.getyCenterCoordinate(), texture.getRegionWidth(), texture.getRegionHeight());
     }
 }

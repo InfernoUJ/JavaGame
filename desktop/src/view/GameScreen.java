@@ -34,11 +34,11 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(GameManager gameManager) {
         super();
         this.gameManager = gameManager;
-        //loadScene();
     }
 
 
     public void loadScene(){
+        if(currentStage != null){currentStage.clear();}
         currentStage = new Stage(gameManager.getViewport());
 
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

@@ -7,11 +7,13 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import projectiles.Projectile;
 
-public class Bullet extends Actor {
+public class Bullet extends Actor implements Bounded{
     private float radius;
+    private Rectangle bound;
     private TextureRegion bulletTexture;
     private final Projectile myProjectile;
     private boolean wasHit = false;
@@ -60,5 +62,12 @@ public class Bullet extends Actor {
 
     public boolean hasProjectile(Projectile p) {
         return p == myProjectile;
+    }
+
+    public Rectangle getBound() {
+        return bound;
+    }
+    private void setBound() {
+        bound = new Rectangle(myProjectile.getxCenterCoordinate(), myProjectile.getyCenterCoordinate(), bulletTexture.getRegionWidth(), bulletTexture.getRegionHeight());
     }
 }
