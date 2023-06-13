@@ -1,4 +1,4 @@
-package view;
+package viewmodel;
 
 import com.badlogic.gdx.math.Rectangle;
 

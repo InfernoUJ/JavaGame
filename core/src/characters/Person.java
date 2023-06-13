@@ -13,8 +13,11 @@ public  abstract class Person extends Coordinates implements Movable {
     public Level level;
     private float shootingCooldown = 2;
     public final float basicShootingCooldown = 1;
-    public final int maxHealthPoints = 100;
+    private int maxHealthPoints = 100;
     int healthPoints = 100;
+    public int getMaxHealthPoints() {
+        return maxHealthPoints;
+    }
 
     @Override
     public int getWidth() {

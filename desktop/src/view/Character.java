@@ -26,7 +26,7 @@ public class Character extends Actor implements Bounded {
     public void draw(Batch batch, float parentAlpha) {
         if(!killed) {
             batch.draw(texture, myhero.getxCenterCoordinate(), myhero.getyCenterCoordinate());
-            hpBar.setCurrentValue((float) myhero.getHealthPoints() / (float) myhero.maxHealthPoints);
+            hpBar.setCurrentValue((float) myhero.getHealthPoints() / (float) myhero.getMaxHealthPoints());
 
             hpBar.draw(batch, parentAlpha);
         }
