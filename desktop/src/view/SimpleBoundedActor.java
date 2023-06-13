@@ -9,7 +9,7 @@ public class SimpleBoundedActor extends Actor {
     protected final SimpleBounded myEntity;
     protected final TextureRegion texture;
 
-    SimpleBoundedActor(SimpleBounded myEntity, TextureRegion texture) {
+    public SimpleBoundedActor(SimpleBounded myEntity, TextureRegion texture) {
         this.myEntity = myEntity;
         this.texture = texture;
     }
