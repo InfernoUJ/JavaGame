@@ -17,7 +17,13 @@ public class SimpleBounded implements Bounded{
     protected void setBound(Rectangle bound) {
         this.bound = bound;
     }
-    protected void updateBound() {
+    public void updateBound() {
         this.bound = new Rectangle(myEntity.getxCenterCoordinate(), myEntity.getyCenterCoordinate(), bound.width, bound.height);
+    }
+    public float getX(){
+        return myEntity.getxCenterCoordinate();
+    }
+    public float getY(){
+        return myEntity.getyCenterCoordinate();
     }
 }
