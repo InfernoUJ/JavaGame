@@ -131,8 +131,8 @@ public class GameManager {
                 return;
             }
             Projectile p = getPlayer().shoot(Pair.of(closestEnemy.getX(), closestEnemy.getY()));
-            System.out.println("Shooting from " + p.getxCenterCoordinate() +" "+ p.getyCenterCoordinate());
-            System.out.println("Shooting to " + p.getDirection().getLeft() +" "+ p.getDirection().getRight());
+//            System.out.println("Shooting from " + p.getxCenterCoordinate() +" "+ p.getyCenterCoordinate());
+//            System.out.println("Shooting to " + p.getDirection().getLeft() +" "+ p.getDirection().getRight());
             Pair<Bullet, BulletDrawable> bulletEntities= supplierForBullets.createPair(p, createBulletTexture(5));
             bullets.add(bulletEntities.getLeft());
             gameScreen.addBullet(bulletEntities.getRight());
@@ -179,7 +179,7 @@ public class GameManager {
                 //gameScreen.removeBullet(p);
             }
         }
-        game.getCurrentLevel().projectiles.removeAll(toRemove);
+        removeBullets(toRemove);
     }
 
     private boolean isOutOfMap(SimpleBounded p){
@@ -187,35 +187,47 @@ public class GameManager {
     }
 
     private void hitEveryone(){
-        List<Projectile> projectilesToRemove = new ArrayList<>();
-        List<Person> enemiesToRemove = new ArrayList<>();
-        for (Projectile p : game.getCurrentLevel().projectiles) {
-            if(Coordinates.getXDistance(p, getPlayer()) < 10
-                    && Coordinates.getYDistance(p, getPlayer()) < 10){
-                p.hit(getPlayer());
+        List<Bullet> bulletsToRemove = new ArrayList<>();
+        List<Character> enemiesToRemove = new ArrayList<>();
+        System.out.println("bullet len: " + bullets.size());
+        for (Bullet bullet : bullets) {
+            if(bullet.overlaps(hero)){
+                System.out.println("Hit hero");
+                bullet.myProjectile.hit(hero.myPerson);
                 //gameScreen.removeBullet(p);
-                projectilesToRemove.add(p);
-                if(getPlayer().getHealthPoints() <= 0){
+                bulletsToRemove.add(bullet);
+                if(hero.getHpInPercent() <= 0f){
                     gameLost();
                 }
             }
-            for(Person enemy : game.getCurrentLevel().enemies) {
-                if(Coordinates.getXDistance(p, enemy) < 10
-                        && Coordinates.getYDistance(p, enemy) < 10){
-                    p.hit(enemy);
-                    if(enemy.getHealthPoints() <= 0){
+            for(Character enemy : enemies) {
+                if(bullet.overlaps(enemy)){
+                    System.out.println("Hit enemy");
+                    bullet.myProjectile.hit(enemy.myPerson);
+                    if(enemy.getHpInPercent() <= 0f){
                         enemiesToRemove.add(enemy);
                         //gameScreen.removeEnemy(enemy);
                     }
                     //gameScreen.removeBullet(p);
-                    projectilesToRemove.add(p);
+                    bulletsToRemove.add(bullet);
                 }
             }
         }
-        game.getCurrentLevel().projectiles.removeAll(projectilesToRemove);
-        game.getCurrentLevel().enemies.removeAll(enemiesToRemove);
+        removeBullets(bulletsToRemove);
+        removeEnemies(enemiesToRemove);
     }
-
+    private void removeBullets(List<Bullet> toRemove){
+        for(Bullet bullet : toRemove){
+            game.getCurrentLevel().projectiles.remove(bullet.myProjectile);
+        }
+        bullets.removeAll(toRemove);
+    }
+    private void removeEnemies(List<Character> toRemove){
+        for(Character enemy : toRemove){
+            game.getCurrentLevel().enemies.remove(enemy.myPerson);
+        }
+        enemies.removeAll(toRemove);
+    }
     public void nextLevel() {
         game.advanceToTheNextLevel();
         loadGameScreen();
