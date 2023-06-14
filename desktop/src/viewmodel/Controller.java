@@ -14,16 +14,8 @@ public class Controller extends InputAdapter {
         so I have to invite my own bicycle
     */
     private final GameManager gameManager;
-    private Map<Integer, Mover> mover = new HashMap();
-    private void infiniteLoop(int keyCode){
-        if(!mover.containsKey(keyCode)){
-            mover.put(keyCode, new Mover<>(gameManager::processKeyDown, keyCode));
-            mover.get(keyCode).start();
-        }
-        else{
-            mover.get(keyCode).resumeWork();
-        }
-    }
+
+
 
     public Controller(GameManager gameManager){
         this.gameManager = gameManager;
@@ -31,24 +23,24 @@ public class Controller extends InputAdapter {
 
     @Override
     public boolean keyDown(int keyCode) {
-        // TODO:maybe change from void type to boolean
-        //System.out.println("Updated " + gameManager.getHeroXCoordinate() +" "+ gameManager.getHeroYCoordinate());
-        infiniteLoop(keyCode);
+        for(Direction direction : Direction.values()) {
+            if(direction.keyCodes.contains(keyCode)) {
+                gameManager.gameScreen.turnOnPlayerMovementInDirection(direction);
+            }
+        }
         return true;
     }
 
     @Override
     public boolean keyUp(int keyCode){
-        //System.out.println("Upped " + keyCode);
-        mover.get(keyCode).stopWork();
+        for(Direction direction : Direction.values()) {
+            if(direction.keyCodes.contains(keyCode)) {
+                gameManager.gameScreen.turnOffPlayerMovementInDirection(direction);
+            }
+        }
         return true;
     }
 
-    public void stopAllMovers(){
-        for(Mover m : mover.values()){
-            m.stopWork();
-        }
-        mover.clear();
-    }
+
 
 }
