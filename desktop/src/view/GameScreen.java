@@ -95,7 +95,7 @@ public class GameScreen extends ScreenAdapter {
         for(Map.Entry<Direction,Boolean> entry : playerMoveDirections.entrySet()) {
             Direction direction = entry.getKey();
             Boolean isOn = entry.getValue();
-            if(!isOn) {
+            if(isOn) {
                 direction.movePlayer(player);
             }
         }
