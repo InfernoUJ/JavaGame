@@ -22,7 +22,7 @@ public class Controller extends InputAdapter {
     }
 
     @Override
-    public boolean keyDown(int keyCode) {
+    public boolean keyUp(int keyCode) {
         for(Direction direction : Direction.values()) {
             if(direction.keyCodes.contains(keyCode)) {
                 gameManager.gameScreen.turnOnPlayerMovementInDirection(direction);
@@ -32,7 +32,7 @@ public class Controller extends InputAdapter {
     }
 
     @Override
-    public boolean keyUp(int keyCode){
+    public boolean keyDown(int keyCode){
         for(Direction direction : Direction.values()) {
             if(direction.keyCodes.contains(keyCode)) {
                 gameManager.gameScreen.turnOffPlayerMovementInDirection(direction);
