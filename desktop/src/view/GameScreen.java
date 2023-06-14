@@ -128,6 +128,7 @@ public class GameScreen extends ScreenAdapter {
                 break;
             }
         }
+        System.out.println("Removing bullet "+idx);
         if(idx > 0){
 //            bullets.get(idx).hit();
 //            bullets.get(idx).draw(currentStage.getBatch(), 0);

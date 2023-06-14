@@ -123,7 +123,7 @@ public class GameManager {
         return new TextureRegion(texture);
     }
     private void shootAllProjectiles() {
-        if(getPlayer().getShootingCooldown() <= 0){
+        if(hero.myPerson.getShootingCooldown() <= 0){
             Character closestEnemy = findClosestEnemy();
             if (closestEnemy == null){
                 //throw new RuntimeException("No enemies found");
@@ -136,16 +136,17 @@ public class GameManager {
             Pair<Bullet, BulletDrawable> bulletEntities= supplierForBullets.createPair(p, createBulletTexture(5));
             bullets.add(bulletEntities.getLeft());
             gameScreen.addBullet(bulletEntities.getRight());
-            getPlayer().resetCd();
+            hero.myPerson.resetCd();
         }
 
-        for(Person enemy : game.getCurrentLevel().enemies) {
-            if(enemy.getShootingCooldown() <= 0){
-                Projectile p = enemy.shoot(Pair.of(getHeroXCoordinate(), getHeroYCoordinate()));
+        for(Character enemy : enemies) {
+            if(enemy.myPerson.getShootingCooldown() <= 0){
+                //System.out.println("Enemy cd " + enemy.myPerson.getShootingCooldown());
+                Projectile p = enemy.myPerson.shoot(Pair.of(hero.getX(), hero.getY()));
                 Pair<Bullet, BulletDrawable> bulletEntities= supplierForBullets.createPair(p, createBulletTexture(5));
                 bullets.add(bulletEntities.getLeft());
                 gameScreen.addBullet(bulletEntities.getRight());
-                enemy.resetCd();
+                enemy.myPerson.resetCd();
             }
         }
     }
@@ -192,7 +193,7 @@ public class GameManager {
         List<Character> enemiesToRemove = new ArrayList<>();
         //System.out.println("bullet len: " + bullets.size());
         for (Bullet bullet : bullets) {
-            if(bullet.overlaps(hero)){
+            if(bullet.overlaps(hero) && bullet.isEnemyBullet()){
                 //System.out.println("Hit hero");
                 bullet.myProjectile.hit(hero.myPerson);
                 gameScreen.removeBullet(bullet);
@@ -202,7 +203,7 @@ public class GameManager {
                 }
             }
             for(Character enemy : enemies) {
-                if(bullet.overlaps(enemy)){
+                if(bullet.overlaps(enemy) && !bullet.isEnemyBullet()){
                     //System.out.println("Hit enemy");
                     bullet.myProjectile.hit(enemy.myPerson);
                     gameScreen.removeBullet(bullet);

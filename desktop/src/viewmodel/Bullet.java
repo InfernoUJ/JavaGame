@@ -10,4 +10,7 @@ public class Bullet extends SimpleBounded{
         this.myProjectile = myProjectile;
         setBound(bound);
     }
+    public boolean isEnemyBullet(){
+        return myProjectile instanceof projectiles.EnemyProjectile;
+    }
 }
