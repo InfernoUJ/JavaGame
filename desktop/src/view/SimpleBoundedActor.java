@@ -19,6 +19,8 @@ public abstract class SimpleBoundedActor extends Actor {
         super.draw(batch, parentAlpha);
 //        if(!wasHit){
         batch.draw(texture, myEntity.getX(), myEntity.getY());
+        setX(myEntity.getX());
+        setY(myEntity.getY());
 //        }
 //        if(wasHit){
 ////            batch.flush();

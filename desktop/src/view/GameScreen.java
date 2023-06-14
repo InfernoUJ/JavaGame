@@ -14,10 +14,9 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import projectiles.Projectile;
-import viewmodel.Bounded;
+import viewmodel.*;
 import viewmodel.Character;
-import viewmodel.Direction;
-import viewmodel.GameManager;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +66,8 @@ public class GameScreen extends ScreenAdapter {
                 mapRenderer.render();
             }
         });
+
+        currentStage.addActor(new Actor());
     }
 
     public void addHero(CharacterDrawable hero) {
@@ -105,7 +106,8 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // Set the background color
         // TODO: move it to textures and skin pack( or smth like that)
-
+        //System.out.println("X "+currentStage.getWidth()+" Y "+currentStage.getHeight());
+        //System.out.println("X "+hero.getX()+" Y "+hero.getY());
         currentStage.act(delta);
         gameManager.moveEnemies();
         currentStage.draw();
@@ -118,35 +120,35 @@ public class GameScreen extends ScreenAdapter {
         currentStage.getViewport().update(width, height, true);
     }
 
-//    public void removeBullet(Projectile p) {
-//        int idx = -1;
-//        for(int i = 0; i < bullets.size(); i++){
-//            if(bullets.get(i).hasProjectile(p)){
-//                idx = i;
-//                break;
-//            }
-//        }
-//        if(idx > 0){
+    public void removeBullet(Bullet bullet) {
+        int idx = -1;
+        for(int i = 0; i < bullets.size(); i++){
+            if(bullets.get(i).myBullet == bullet){
+                idx = i;
+                break;
+            }
+        }
+        if(idx > 0){
 //            bullets.get(idx).hit();
 //            bullets.get(idx).draw(currentStage.getBatch(), 0);
-//            bullets.get(idx).remove();
-//            bullets.remove(idx);
-//        }
-//    }
+            bullets.get(idx).remove();
+            bullets.remove(idx);
+        }
+    }
 
-//    public void removeEnemy(Person enemy) {
-//        int idx = -1;
-//        for(int i = 0; i < enemies.size(); i++){
-//            if(enemies.get(i).myhero == enemy){
-//                idx = i;
-//                break;
-//            }
-//        }
-//        if(idx > 0){
+    public void removeEnemy(Character enemy) {
+        int idx = -1;
+        for(int i = 0; i < enemies.size(); i++){
+            if(enemies.get(i).myHero == enemy){
+                idx = i;
+                break;
+            }
+        }
+        if(idx > 0){
 //            enemies.get(idx).kill();
 //            enemies.get(idx).draw(currentStage.getBatch(), 0);
-//            enemies.get(idx).remove();
-//            enemies.remove(idx);
-//        }
-//    }
+            enemies.get(idx).remove();
+            enemies.remove(idx);
+        }
+    }
 }

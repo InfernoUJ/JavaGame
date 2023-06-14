@@ -174,9 +174,10 @@ public class GameManager {
         List<Bullet> toRemove = new ArrayList<>();
         for (Bullet bullet : bullets) {
             bullet.myProjectile.move(delta);
+            bullet.updateBound();
             if(isOutOfMap(bullet)){
                 toRemove.add(bullet);
-                //gameScreen.removeBullet(p);
+                gameScreen.removeBullet(bullet);
             }
         }
         removeBullets(toRemove);
@@ -189,10 +190,10 @@ public class GameManager {
     private void hitEveryone(){
         List<Bullet> bulletsToRemove = new ArrayList<>();
         List<Character> enemiesToRemove = new ArrayList<>();
-        System.out.println("bullet len: " + bullets.size());
+        //System.out.println("bullet len: " + bullets.size());
         for (Bullet bullet : bullets) {
             if(bullet.overlaps(hero)){
-                System.out.println("Hit hero");
+                //System.out.println("Hit hero");
                 bullet.myProjectile.hit(hero.myPerson);
                 //gameScreen.removeBullet(p);
                 bulletsToRemove.add(bullet);
@@ -217,6 +218,7 @@ public class GameManager {
         removeEnemies(enemiesToRemove);
     }
     private void removeBullets(List<Bullet> toRemove){
+        //System.out.println("bullets to remove: " + toRemove.size());
         for(Bullet bullet : toRemove){
             game.getCurrentLevel().projectiles.remove(bullet.myProjectile);
         }
@@ -234,8 +236,13 @@ public class GameManager {
     }
 
     public void moveEnemies(){
+        // TODO
+        //  - make class Enem extends Character
         for(Enemy enemy : game.getCurrentLevel().enemies) {
             enemy.moveToPlayer(getPlayer());
+        }
+        for(Character enemy : enemies) {
+            enemy.updateBound();
         }
     }
     private void endLevel(){
