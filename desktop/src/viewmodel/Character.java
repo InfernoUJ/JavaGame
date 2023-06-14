@@ -14,10 +14,6 @@ public class Character extends SimpleBounded {
         this.myPerson = myEntity;
         setBound(bound);
     }
-    @Override
-    public Rectangle getBound() {
-        return null;
-    }
     public float getHpInPercent(){
         return (float) myPerson.getHealthPoints() / (float) myPerson.getMaxHealthPoints();
     }

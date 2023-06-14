@@ -68,25 +68,25 @@ public class GameScreen extends ScreenAdapter {
         });
 
         //hero = new Character(gameManager.getPlayer(), new TextureRegion(new Texture("hero2.png")));
-        currentStage.addActor(hero);
+        //currentStage.addActor(hero);
     }
 
     public void addHero(CharacterDrawable hero) {
         this.hero = hero;
+        currentStage.addActor(hero);
     }
 
     public void addEnemy(CharacterDrawable enemy){
         enemies.add(enemy);
     }
 
-    public void addBullet(Projectile p){
-        Bullet b = new Bullet(7, p);
-        bullets.add(b);
-        currentStage.addActor(b);
+    public void addBullet(SimpleBoundedActor bullet){
+        bullets.add(bullet);
+        currentStage.addActor(bullet);
     }
 
     public void loadEnemies(){
-        for (Character enemy : enemies) {
+        for (CharacterDrawable enemy : enemies) {
             currentStage.addActor(enemy);
         }
     }
@@ -120,35 +120,35 @@ public class GameScreen extends ScreenAdapter {
         currentStage.getViewport().update(width, height, true);
     }
 
-    public void removeBullet(Projectile p) {
-        int idx = -1;
-        for(int i = 0; i < bullets.size(); i++){
-            if(bullets.get(i).hasProjectile(p)){
-                idx = i;
-                break;
-            }
-        }
-        if(idx > 0){
-            bullets.get(idx).hit();
-            bullets.get(idx).draw(currentStage.getBatch(), 0);
-            bullets.get(idx).remove();
-            bullets.remove(idx);
-        }
-    }
+//    public void removeBullet(Projectile p) {
+//        int idx = -1;
+//        for(int i = 0; i < bullets.size(); i++){
+//            if(bullets.get(i).hasProjectile(p)){
+//                idx = i;
+//                break;
+//            }
+//        }
+//        if(idx > 0){
+//            bullets.get(idx).hit();
+//            bullets.get(idx).draw(currentStage.getBatch(), 0);
+//            bullets.get(idx).remove();
+//            bullets.remove(idx);
+//        }
+//    }
 
-    public void removeEnemy(Person enemy) {
-        int idx = -1;
-        for(int i = 0; i < enemies.size(); i++){
-            if(enemies.get(i).myhero == enemy){
-                idx = i;
-                break;
-            }
-        }
-        if(idx > 0){
-            enemies.get(idx).kill();
-            enemies.get(idx).draw(currentStage.getBatch(), 0);
-            enemies.get(idx).remove();
-            enemies.remove(idx);
-        }
-    }
+//    public void removeEnemy(Person enemy) {
+//        int idx = -1;
+//        for(int i = 0; i < enemies.size(); i++){
+//            if(enemies.get(i).myhero == enemy){
+//                idx = i;
+//                break;
+//            }
+//        }
+//        if(idx > 0){
+//            enemies.get(idx).kill();
+//            enemies.get(idx).draw(currentStage.getBatch(), 0);
+//            enemies.get(idx).remove();
+//            enemies.remove(idx);
+//        }
+//    }
 }

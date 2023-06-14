@@ -5,6 +5,8 @@ import characters.Person;
 import characters.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -110,7 +112,15 @@ public class GameManager {
             endLevel();
         }
     }
-
+    private TextureRegion createBulletTexture(float radius) {
+        int diameter = (int) (2 * radius);
+        Pixmap pixmap = new Pixmap(diameter, diameter, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.BLACK);
+        pixmap.fillCircle((int)radius, (int)radius, (int) radius);
+        Texture texture = new Texture(pixmap);
+        pixmap.dispose();
+        return new TextureRegion(texture);
+    }
     private void shootAllProjectiles() {
         if(getPlayer().getShootingCooldown() <= 0){
             Person closestEnemy = findClosestEnemy();
@@ -122,15 +132,19 @@ public class GameManager {
             Projectile p = getPlayer().shoot(Pair.of(closestEnemy.getxCenterCoordinate(), closestEnemy.getyCenterCoordinate()));
             System.out.println("Shooting from " + p.getxCenterCoordinate() +" "+ p.getyCenterCoordinate());
             System.out.println("Shooting to " + p.getDirection().getLeft() +" "+ p.getDirection().getRight());
+            Pair<SimpleBounded, SimpleBoundedActor> bulletEntities= supplierForBullets.createPair(p, createBulletTexture(5));
+            bullets.add(bulletEntities.getLeft());
+            gameScreen.addBullet(bulletEntities.getRight());
             getPlayer().resetCd();
-            gameScreen.addBullet(p);
         }
 
         for(Person enemy : game.getCurrentLevel().enemies) {
             if(enemy.getShootingCooldown() <= 0){
                 Projectile p = enemy.shoot(Pair.of(getHeroXCoordinate(), getHeroYCoordinate()));
+                Pair<SimpleBounded, SimpleBoundedActor> bulletEntities= supplierForBullets.createPair(p, createBulletTexture(5));
+                bullets.add(bulletEntities.getLeft());
+                gameScreen.addBullet(bulletEntities.getRight());
                 enemy.resetCd();
-                gameScreen.addBullet(p);
             }
         }
     }
@@ -161,7 +175,7 @@ public class GameManager {
             p.move(delta);
             if(isOutOfMap(p)){
                 toRemove.add(p);
-                gameScreen.removeBullet(p);
+                //gameScreen.removeBullet(p);
             }
         }
         game.getCurrentLevel().projectiles.removeAll(toRemove);
@@ -179,7 +193,7 @@ public class GameManager {
             if(Coordinates.getXDistance(p, getPlayer()) < 10
                     && Coordinates.getYDistance(p, getPlayer()) < 10){
                 p.hit(getPlayer());
-                gameScreen.removeBullet(p);
+                //gameScreen.removeBullet(p);
                 projectilesToRemove.add(p);
                 if(getPlayer().getHealthPoints() <= 0){
                     gameLost();
@@ -191,9 +205,9 @@ public class GameManager {
                     p.hit(enemy);
                     if(enemy.getHealthPoints() <= 0){
                         enemiesToRemove.add(enemy);
-                        gameScreen.removeEnemy(enemy);
+                        //gameScreen.removeEnemy(enemy);
                     }
-                    gameScreen.removeBullet(p);
+                    //gameScreen.removeBullet(p);
                     projectilesToRemove.add(p);
                 }
             }
