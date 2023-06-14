@@ -1,30 +1,33 @@
 package view;
 
 import characters.Person;
+import characters.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import projectiles.Projectile;
+import viewmodel.Direction;
 import viewmodel.GameManager;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class GameScreen extends ScreenAdapter {
     private GameManager gameManager;
     private Stage currentStage;
     private Character character;
-    private Map map;
+
+    private Map<Direction,Boolean> playerMoveDirections = new ConcurrentHashMap<>();
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer mapRenderer;
     private Character hero;
@@ -35,9 +38,15 @@ public class GameScreen extends ScreenAdapter {
         super();
         this.gameManager = gameManager;
     }
-
+    public void turnOnPlayerMovementInDirection(Direction direction) {
+        playerMoveDirections.put(direction, true);
+    }
+    public void turnOffPlayerMovementInDirection(Direction direction) {
+        playerMoveDirections.put(direction, false);
+    }
 
     public void loadScene(){
+        playerMoveDirections.clear();
         if(currentStage != null){currentStage.clear();}
         currentStage = new Stage(gameManager.getViewport());
 
@@ -79,7 +88,16 @@ public class GameScreen extends ScreenAdapter {
             currentStage.addActor(enemy);
         }
     }
-
+    private void movePlayer() {
+        Player player = gameManager.getPlayer();
+        for(Map.Entry<Direction,Boolean> entry : playerMoveDirections.entrySet()) {
+            Direction direction = entry.getKey();
+            Boolean isOn = entry.getValue();
+            if(!isOn) {
+                direction.movePlayer(player);
+            }
+        }
+    }
     @Override
     public void render(float delta) {
         super.render(delta);
@@ -92,6 +110,7 @@ public class GameScreen extends ScreenAdapter {
         gameManager.moveEnemies();
         currentStage.draw();
         gameManager.makeShooting(delta);
+        movePlayer();
     }
 
     @Override
