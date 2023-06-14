@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import projectiles.Projectile;
+import viewmodel.Bounded;
 import viewmodel.Character;
 import viewmodel.Direction;
 import viewmodel.GameManager;
@@ -33,7 +34,7 @@ public class GameScreen extends ScreenAdapter {
     private OrthogonalTiledMapRenderer mapRenderer;
     private CharacterDrawable hero;
     private List<CharacterDrawable> enemies = new ArrayList<>();
-    private List<SimpleBoundedActor> bullets = new ArrayList<>();
+    private List<BulletDrawable> bullets = new ArrayList<>();
     private final Random random = new Random();
     public GameScreen(GameManager gameManager) {
         super();
@@ -66,9 +67,6 @@ public class GameScreen extends ScreenAdapter {
                 mapRenderer.render();
             }
         });
-
-        //hero = new Character(gameManager.getPlayer(), new TextureRegion(new Texture("hero2.png")));
-        //currentStage.addActor(hero);
     }
 
     public void addHero(CharacterDrawable hero) {
@@ -80,7 +78,7 @@ public class GameScreen extends ScreenAdapter {
         enemies.add(enemy);
     }
 
-    public void addBullet(SimpleBoundedActor bullet){
+    public void addBullet(BulletDrawable bullet){
         bullets.add(bullet);
         currentStage.addActor(bullet);
     }

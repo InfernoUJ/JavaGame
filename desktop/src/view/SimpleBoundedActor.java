@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import viewmodel.SimpleBounded;
 
-public class SimpleBoundedActor extends Actor {
+public abstract class SimpleBoundedActor extends Actor {
     protected final SimpleBounded myEntity;
     protected final TextureRegion texture;
 

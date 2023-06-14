@@ -13,4 +13,10 @@ public interface Bounded {
     default boolean overlaps(float x, float y){
         return getBound().contains(x, y);
     }
+    default boolean intersectsX(float x){
+        return getBound().x <= x && x <= getBound().x + getBound().width;
+    }
+    default boolean intersectsY(float y){
+        return getBound().y <= y && y <= getBound().y + getBound().height;
+    }
 }

@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import coreStructures.Coordinates;
 import mainGame.Game;
 import projectiles.Projectile;
+import view.BulletDrawable;
 import view.CharacterDrawable;
 import view.GameScreen;
 import org.apache.commons.lang3.tuple.Pair;
@@ -30,7 +31,7 @@ public class GameManager {
     private List<Character> enemies = new ArrayList<>();
     private final SupplierForBullets supplierForBullets = new SupplierForBullets();
     private final SupplierForCharacters supplierForCharacters = new SupplierForCharacters();
-    private List<SimpleBounded> bullets = new ArrayList<>();
+    private List<Bullet> bullets = new ArrayList<>();
     public final GameScreen gameScreen = new GameScreen(this);
     private Controller controller;
 
@@ -108,7 +109,7 @@ public class GameManager {
     }
 
     private void checkIfEnemiesAreDead() {
-        if(game.getCurrentLevel().enemies.isEmpty()) {
+        if(enemies.isEmpty()){
             endLevel();
         }
     }
@@ -123,16 +124,16 @@ public class GameManager {
     }
     private void shootAllProjectiles() {
         if(getPlayer().getShootingCooldown() <= 0){
-            Person closestEnemy = findClosestEnemy();
+            Character closestEnemy = findClosestEnemy();
             if (closestEnemy == null){
                 //throw new RuntimeException("No enemies found");
                 endLevel();
                 return;
             }
-            Projectile p = getPlayer().shoot(Pair.of(closestEnemy.getxCenterCoordinate(), closestEnemy.getyCenterCoordinate()));
+            Projectile p = getPlayer().shoot(Pair.of(closestEnemy.getX(), closestEnemy.getY()));
             System.out.println("Shooting from " + p.getxCenterCoordinate() +" "+ p.getyCenterCoordinate());
             System.out.println("Shooting to " + p.getDirection().getLeft() +" "+ p.getDirection().getRight());
-            Pair<SimpleBounded, SimpleBoundedActor> bulletEntities= supplierForBullets.createPair(p, createBulletTexture(5));
+            Pair<Bullet, BulletDrawable> bulletEntities= supplierForBullets.createPair(p, createBulletTexture(5));
             bullets.add(bulletEntities.getLeft());
             gameScreen.addBullet(bulletEntities.getRight());
             getPlayer().resetCd();
@@ -141,7 +142,7 @@ public class GameManager {
         for(Person enemy : game.getCurrentLevel().enemies) {
             if(enemy.getShootingCooldown() <= 0){
                 Projectile p = enemy.shoot(Pair.of(getHeroXCoordinate(), getHeroYCoordinate()));
-                Pair<SimpleBounded, SimpleBoundedActor> bulletEntities= supplierForBullets.createPair(p, createBulletTexture(5));
+                Pair<Bullet, BulletDrawable> bulletEntities= supplierForBullets.createPair(p, createBulletTexture(5));
                 bullets.add(bulletEntities.getLeft());
                 gameScreen.addBullet(bulletEntities.getRight());
                 enemy.resetCd();
@@ -149,12 +150,12 @@ public class GameManager {
         }
     }
 
-    private Person findClosestEnemy() {
-        Person closestEnemy = null;
-        for (Person enemy : game.getCurrentLevel().enemies) {
+    private Character findClosestEnemy() {
+        Character closestEnemy = null;
+        for (Character enemy : enemies) {
             if (closestEnemy == null) {
                 closestEnemy = enemy;
-            } else if(Coordinates.getDistance(getPlayer(), enemy) < Coordinates.getDistance(getPlayer(), closestEnemy)) {
+            } else if(Coordinates.getDistance(getPlayer(), enemy.getCoordinates()) < Coordinates.getDistance(getPlayer(), closestEnemy.getCoordinates())) {
                 closestEnemy = enemy;
             }
         }
@@ -164,26 +165,25 @@ public class GameManager {
     private void decrementAllCD(float delta){
         getPlayer().decrementBigAoeCd(delta);
         getPlayer().decrementCd(delta);
-        for(Person enemy : game.getCurrentLevel().enemies) {
-            enemy.decrementCd(delta);
+        for(Character enemy : enemies) {
+            enemy.myPerson.decrementCd(delta);
         }
     }
 
     private void moveAllProjectTiles(float delta){
-        List<Projectile> toRemove = new ArrayList<>();
-        for (Projectile p : game.getCurrentLevel().projectiles) {
-            p.move(delta);
-            if(isOutOfMap(p)){
-                toRemove.add(p);
+        List<Bullet> toRemove = new ArrayList<>();
+        for (Bullet bullet : bullets) {
+            bullet.myProjectile.move(delta);
+            if(isOutOfMap(bullet)){
+                toRemove.add(bullet);
                 //gameScreen.removeBullet(p);
             }
         }
         game.getCurrentLevel().projectiles.removeAll(toRemove);
     }
 
-    private boolean isOutOfMap(Coordinates p){
-        return p.getxCenterCoordinate() < 0 || p.getxCenterCoordinate() > 1920
-                || p.getyCenterCoordinate() < 0 || p.getyCenterCoordinate() > 1080;
+    private boolean isOutOfMap(SimpleBounded p){
+        return p.intersectsX(1920) || p.intersectsY(1080) || p.intersectsX(0) || p.intersectsY(0);
     }
 
     private void hitEveryone(){

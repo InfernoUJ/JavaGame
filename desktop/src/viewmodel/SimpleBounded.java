@@ -3,7 +3,7 @@ package viewmodel;
 import com.badlogic.gdx.math.Rectangle;
 import coreStructures.Coordinates;
 
-public class SimpleBounded implements Bounded{
+public abstract class SimpleBounded implements Bounded{
     protected final Coordinates myEntity;
     protected Rectangle bound;
     public SimpleBounded(Coordinates myEntity, Rectangle bound) {
@@ -25,5 +25,8 @@ public class SimpleBounded implements Bounded{
     }
     public float getY(){
         return myEntity.getyCenterCoordinate();
+    }
+    public Coordinates getCoordinates(){
+        return myEntity;
     }
 }
