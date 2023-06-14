@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import projectiles.Projectile;
+import viewmodel.Character;
 import viewmodel.Direction;
 import viewmodel.GameManager;
 import java.util.ArrayList;
@@ -30,9 +31,9 @@ public class GameScreen extends ScreenAdapter {
     private Map<Direction,Boolean> playerMoveDirections = new ConcurrentHashMap<>();
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer mapRenderer;
-    private Character hero;
-    private List<Character> enemies = new ArrayList<>();
-    private List<Bullet> bullets = new ArrayList<>();
+    private CharacterDrawable hero;
+    private List<CharacterDrawable> enemies = new ArrayList<>();
+    private List<SimpleBoundedActor> bullets = new ArrayList<>();
     private final Random random = new Random();
     public GameScreen(GameManager gameManager) {
         super();
@@ -66,15 +67,16 @@ public class GameScreen extends ScreenAdapter {
             }
         });
 
-        hero = new Character(gameManager.getPlayer(), new TextureRegion(new Texture("hero2.png")));
+        //hero = new Character(gameManager.getPlayer(), new TextureRegion(new Texture("hero2.png")));
         currentStage.addActor(hero);
     }
 
-    public void addEnemy(Person enemy){
-        Random r = new Random();
-        String[] enemyTexture = {"enemy2_2.png", "enemy2.png", "enemy3.png"};
-        Character character = new Character( enemy, new TextureRegion(new Texture(enemyTexture[r.nextInt(enemyTexture.length)])));
-        enemies.add(character);
+    public void addHero(CharacterDrawable hero) {
+        this.hero = hero;
+    }
+
+    public void addEnemy(CharacterDrawable enemy){
+        enemies.add(enemy);
     }
 
     public void addBullet(Projectile p){

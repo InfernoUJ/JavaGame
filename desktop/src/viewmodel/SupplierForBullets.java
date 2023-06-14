@@ -6,7 +6,7 @@ import coreStructures.Coordinates;
 import org.apache.commons.lang3.tuple.Pair;
 import view.SimpleBoundedActor;
 
-public class SupplierForBullets extends AbstractFactoryForActors<SimpleBounded, SimpleBoundedActor>{
+public class SupplierForBullets {
 
     protected SimpleBoundedActor createActor(SimpleBounded presenter, TextureRegion texture) {
         return new SimpleBoundedActor(presenter, texture);
@@ -16,7 +16,6 @@ public class SupplierForBullets extends AbstractFactoryForActors<SimpleBounded, 
         return new SimpleBounded(entity, new Rectangle(entity.getxCenterCoordinate(), entity.getyCenterCoordinate(), texture.getRegionWidth(), texture.getRegionHeight()));
     }
 
-    @Override
     public Pair<SimpleBounded, SimpleBoundedActor> createPair(Coordinates entity, TextureRegion texture){
         SimpleBounded presenter = createVMPresenter(entity, texture);
         SimpleBoundedActor actor = createActor(presenter, texture);

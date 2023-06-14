@@ -5,20 +5,30 @@ import characters.Person;
 import characters.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import coreStructures.Coordinates;
 import mainGame.Game;
 import projectiles.Projectile;
+import view.CharacterDrawable;
 import view.GameScreen;
 import org.apache.commons.lang3.tuple.Pair;
+import view.SimpleBoundedActor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class GameManager {
     public final Game game;
     private final Manager mainManager;
+    private Character hero = null;
+    private List<Character> enemies = new ArrayList<>();
+    private final SupplierForBullets supplierForBullets = new SupplierForBullets();
+    private final SupplierForCharacters supplierForCharacters = new SupplierForCharacters();
+    private List<SimpleBounded> bullets = new ArrayList<>();
     public final GameScreen gameScreen = new GameScreen(this);
     private Controller controller;
 
@@ -42,7 +52,14 @@ public class GameManager {
         controller = new Controller(this);
         Gdx.input.setInputProcessor(controller);
         gameScreen.loadScene();
+        addHero();
         addEnemies();
+    }
+
+    private void addHero() {
+        Pair<Character, CharacterDrawable> heroEntities = supplierForCharacters.createPair(getPlayer(), new TextureRegion(new Texture("hero2.png")));
+        this.hero = heroEntities.getLeft();
+        gameScreen.addHero(heroEntities.getRight());
     }
 
     public void processKeyDown(int keyCode) {
@@ -70,8 +87,12 @@ public class GameManager {
     }
 
     public void addEnemies() {
+        Random r = new Random();
+        String[] enemyTexture = {"enemy2_2.png", "enemy2.png", "enemy3.png"};
         for(Person enemy : game.getCurrentLevel().enemies) {
-            gameScreen.addEnemy(enemy);
+            Pair<Character, CharacterDrawable> enemyEntities = supplierForCharacters.createPair(enemy, new TextureRegion(new Texture(enemyTexture[r.nextInt(enemyTexture.length)])));
+            enemies.add(enemyEntities.getLeft());
+            gameScreen.addEnemy(enemyEntities.getRight());
         }
         gameScreen.loadEnemies();
     }
@@ -200,6 +221,7 @@ public class GameManager {
         mainManager.loadGameOverMenu();
     }
     private void clean(){
-        controller.stopAllMovers();
+        // TODO: check it is needed
+        //  - controller.stopAllMovers();
     }
 }
