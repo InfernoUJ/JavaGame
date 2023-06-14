@@ -90,12 +90,11 @@ public class GameScreen extends ScreenAdapter {
         }
     }
     private void movePlayer() {
-        Player player = gameManager.getPlayer();
         for(Map.Entry<Direction,Boolean> entry : playerMoveDirections.entrySet()) {
             Direction direction = entry.getKey();
             Boolean isOn = entry.getValue();
             if(isOn) {
-                direction.movePlayer(player);
+                direction.movePlayer(hero.myHero);
             }
         }
     }
@@ -106,8 +105,9 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // Set the background color
         // TODO: move it to textures and skin pack( or smth like that)
-        //System.out.println("X "+currentStage.getWidth()+" Y "+currentStage.getHeight());
-        //System.out.println("X "+hero.getX()+" Y "+hero.getY());
+//        System.out.println("X "+currentStage.getWidth()+" Y "+currentStage.getHeight());
+//        System.out.println("X "+hero.getX()+" Y "+hero.getY());
+        //System.out.println("Drawing hero "+hero.getX()+" "+hero.getY()+" "+hero.myHero.getX()+" "+hero.myHero.getY());
         currentStage.act(delta);
         gameManager.moveEnemies();
         currentStage.draw();

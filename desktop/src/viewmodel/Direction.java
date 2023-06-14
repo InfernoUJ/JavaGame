@@ -15,20 +15,28 @@ public enum Direction {
         this.keyCodes = keyCodes;
     }
 
-    public void movePlayer(Player player) {
+    public void movePlayer(Character player) {
         switch (this) {
-            case NORTH ->
-                    player.setyCenterCoordinate(player.getyCenterCoordinate() +
-                            player.getSpeed());
-            case SOUTH ->
-                    player.setyCenterCoordinate(player.getyCenterCoordinate() -
-                            player.getSpeed());
-            case EAST ->
-                    player.setxCenterCoordinate(player.getxCenterCoordinate() +
-                            player.getSpeed());
-            case WEST ->
-                    player.setxCenterCoordinate(player.getxCenterCoordinate() -
-                            player.getSpeed());
+            case NORTH -> {
+                player.myEntity.setyCenterCoordinate(player.myEntity.getyCenterCoordinate() +
+                        player.myPerson.getSpeed());
+                player.updateBound();
+            }
+            case SOUTH -> {
+                player.myEntity.setyCenterCoordinate(player.myEntity.getyCenterCoordinate() -
+                        player.myPerson.getSpeed());
+                player.updateBound();
+            }
+            case EAST -> {
+                player.myEntity.setxCenterCoordinate(player.myEntity.getxCenterCoordinate() +
+                        player.myPerson.getSpeed());
+                player.updateBound();
+            }
+            case WEST -> {
+                player.myEntity.setxCenterCoordinate(player.myEntity.getxCenterCoordinate() -
+                        player.myPerson.getSpeed());
+                player.updateBound();
+            }
             default -> throw new AssertionError();
         }
     }

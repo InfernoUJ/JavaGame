@@ -195,7 +195,7 @@ public class GameManager {
             if(bullet.overlaps(hero)){
                 //System.out.println("Hit hero");
                 bullet.myProjectile.hit(hero.myPerson);
-                //gameScreen.removeBullet(p);
+                gameScreen.removeBullet(bullet);
                 bulletsToRemove.add(bullet);
                 if(hero.getHpInPercent() <= 0f){
                     gameLost();
@@ -203,13 +203,13 @@ public class GameManager {
             }
             for(Character enemy : enemies) {
                 if(bullet.overlaps(enemy)){
-                    System.out.println("Hit enemy");
+                    //System.out.println("Hit enemy");
                     bullet.myProjectile.hit(enemy.myPerson);
+                    gameScreen.removeBullet(bullet);
                     if(enemy.getHpInPercent() <= 0f){
                         enemiesToRemove.add(enemy);
-                        //gameScreen.removeEnemy(enemy);
+                        gameScreen.removeEnemy(enemy);
                     }
-                    //gameScreen.removeBullet(p);
                     bulletsToRemove.add(bullet);
                 }
             }

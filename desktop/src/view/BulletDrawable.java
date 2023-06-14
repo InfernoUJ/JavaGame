@@ -15,7 +15,6 @@ public class BulletDrawable extends SimpleBoundedActor{
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        System.out.println("Drawing bullet "+getX()+" "+myBullet.getY()+" "+myBullet.getX()+" "+myBullet.getY());
-
+        //System.out.println("Drawing bullet "+getX()+" "+myBullet.getY()+" "+myBullet.getX()+" "+myBullet.getY());
     }
 }
