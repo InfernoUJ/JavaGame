@@ -45,21 +45,6 @@ public class GameManager {
         addEnemies();
     }
 
-    public void processKeyDown(int keyCode) {
-        System.out.println("Updated " + getHeroXCoordinate() +" "+ getHeroYCoordinate());
-        if(keyCode == Input.Keys.W) {
-            game.getCurrentLevel().player.setyCenterCoordinate(getHeroYCoordinate() + getPlayer().getSpeed());
-        }
-        if(keyCode == Input.Keys.S) {
-            game.getCurrentLevel().player.setyCenterCoordinate(getHeroYCoordinate() - getPlayer().getSpeed());
-        }
-        if(keyCode == Input.Keys.D) {
-            game.getCurrentLevel().player.setxCenterCoordinate(getHeroXCoordinate() + getPlayer().getSpeed());
-        }
-        if(keyCode == Input.Keys.A) {
-            game.getCurrentLevel().player.setxCenterCoordinate(getHeroXCoordinate() - getPlayer().getSpeed());
-        }
-    }
 
     public float getHeroXCoordinate(){
         return game.getCurrentLevel().player.getxCenterCoordinate();

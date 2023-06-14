@@ -11,7 +11,7 @@ public enum Direction {
 
     public Set<Integer> keyCodes;
 
-    private Direction(Set<Integer> keyCodes) {
+    Direction(Set<Integer> keyCodes) {
         this.keyCodes = keyCodes;
     }
 
