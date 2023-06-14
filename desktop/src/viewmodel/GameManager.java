@@ -192,14 +192,10 @@ public class GameManager {
         }
     }
     private void endLevel(){
-        clean();
         mainManager.loadVictoryScreen();
     }
     private void gameLost(){
-        clean();
         mainManager.loadGameOverMenu();
     }
-    private void clean(){
-        controller.stopAllMovers();
-    }
+
 }
