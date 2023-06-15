@@ -18,7 +18,6 @@ import view.BulletDrawable;
 import view.CharacterDrawable;
 import view.GameScreen;
 import org.apache.commons.lang3.tuple.Pair;
-import view.SimpleBoundedActor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +40,11 @@ public class GameManager {
         game = new Game();
         game.startGame();
         tiles = game.getCurrentLevel().board.getTiles();
+        int i= 0, j=0;
         for(List<Tile> row : tiles) {
+            System.out.print(i++ + " ");
             for(Tile tile : row) {
+                System.out.print(j++ + " ");
                 System.out.print(tile.getClass().getSimpleName() + String.valueOf(" ").repeat(14 - tile.getClass().getSimpleName().length()));
             }
             System.out.println();

@@ -22,6 +22,7 @@ public class Board extends Coordinates {
         for(int i = 0; i < 15;i++) {
             blocks.add(new FullWallBlock(-7*BlockOfTiles.width + i*BlockOfTiles.width,3) );
         }
+
         for(int y = 0; y < 2;y++) {
             blocks.add(new FullWallBlock(-7*BlockOfTiles.width, 2 * BlockOfTiles.length - y*BlockOfTiles.length));
             for (int x = 0; x < 13; x++) {
@@ -30,14 +31,17 @@ public class Board extends Coordinates {
             blocks.add(new FullWallBlock(7*BlockOfTiles.width,2 * BlockOfTiles.length - y*BlockOfTiles.length));
         }
         blocks.add(new FullWallBlock(-7*BlockOfTiles.width,0));
+
         for(int x = 0; x < 6;x++) {
             blocks.add(blockOfTilesSupplier.generateBlock((-6 + x)* BlockOfTiles.width,0));
         }
         blocks.add(new PlayerSpawnerBlock(0,0));
+
         for(int x = 7;x < 13;x++) {
             blocks.add(blockOfTilesSupplier.generateBlock((-6 + x)* BlockOfTiles.width,0));
         }
         blocks.add(new FullWallBlock(7*BlockOfTiles.width,0));
+
         for(int y = 3; y< 5;y++) {
             blocks.add(new FullWallBlock(-7*BlockOfTiles.width, 2 * BlockOfTiles.length - y*BlockOfTiles.length));
             for (int x = 0; x < 13; x++) {
@@ -77,6 +81,7 @@ public class Board extends Coordinates {
 
     // center coordinates in left down corner
     public List<List<Tile>> getTiles() {
+        //
         int y = 20;
         int x = 0;
         List<List<Tile>> tiles = new ArrayList<>();
@@ -84,6 +89,7 @@ public class Board extends Coordinates {
             tiles.add(new ArrayList<>(45));
         }
         int j = 0;
+        System.out.println("Block Of Tiles size: "+blocks.size());
         for(BlockOfTiles block: blocks){
             int i = 0;
             for(Tile tile : block.internalTiles){
@@ -92,7 +98,7 @@ public class Board extends Coordinates {
             }
             j++;
             x+=3;
-            if(j%13 == 0) {
+            if(j%15 == 0) {
                 y-=3;
                 x=0;
             }
