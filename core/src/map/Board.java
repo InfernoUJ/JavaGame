@@ -74,6 +74,32 @@ public class Board extends Coordinates {
             }
         }
     }
+
+    // center coordinates in left down corner
+    public List<List<Tile>> getTiles() {
+        int y = 20;
+        int x = 0;
+        List<List<Tile>> tiles = new ArrayList<>();
+        for(int i = 0; i < 21;i++) {
+            tiles.add(new ArrayList<>(45));
+        }
+        int j = 0;
+        for(BlockOfTiles block: blocks){
+            int i = 0;
+            for(Tile tile : block.internalTiles){
+                tiles.get(y-i/3).add(x+i%3, tile);
+                i++;
+            }
+            j++;
+            x+=3;
+            if(j%13 == 0) {
+                y-=3;
+                x=0;
+            }
+        }
+
+        return tiles;
+    }
 }
 
 

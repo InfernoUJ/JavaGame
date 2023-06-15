@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import coreStructures.Coordinates;
 import mainGame.Game;
+import map.Tile;
 import projectiles.Projectile;
 import view.BulletDrawable;
 import view.CharacterDrawable;
@@ -34,10 +35,18 @@ public class GameManager {
     private List<Bullet> bullets = new ArrayList<>();
     public final GameScreen gameScreen = new GameScreen(this);
     private Controller controller;
+    private List<List<Tile>> tiles;
 
     GameManager(Manager mainManager){
         game = new Game();
         game.startGame();
+        tiles = game.getCurrentLevel().board.getTiles();
+        for(List<Tile> row : tiles) {
+            for(Tile tile : row) {
+                System.out.print(tile.getClass().getSimpleName() + String.valueOf(" ").repeat(14 - tile.getClass().getSimpleName().length()));
+            }
+            System.out.println();
+        }
 
         this.mainManager = mainManager;
         loadGameScreen();
@@ -230,6 +239,10 @@ public class GameManager {
             game.getCurrentLevel().enemies.remove(enemy.myPerson);
         }
         enemies.removeAll(toRemove);
+    }
+
+    private void addWalls(){
+
     }
     public void nextLevel() {
         game.advanceToTheNextLevel();
